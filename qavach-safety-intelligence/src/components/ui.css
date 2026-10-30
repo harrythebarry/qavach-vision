@@ -1,0 +1,14 @@
+.camview { position: relative; overflow: hidden; background: var(--q-night); border-radius: var(--q-r); aspect-ratio: 16 / 9; container-type: inline-size; }
+.camview > svg:first-child { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+.camview__zones { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.camview__zone-label { position: absolute; transform: translateX(-50%); font-size: 11px; font-weight: 600; color: #fff; background: rgba(11, 24, 40, .78); border-left: 3px solid; padding: 1px 6px; border-radius: 3px; white-space: nowrap; pointer-events: none; }
+.camview__caption {
+  position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 6px;
+  padding: 14px 8px 5px; color: #E8EDF3; font-size: 11.5px; font-weight: 500;
+  background: linear-gradient(to top, rgba(6, 14, 26, .82), rgba(6, 14, 26, 0));
+}
+@container (max-width: 220px) { .camview__caption { font-size: 10px; padding: 10px 6px 3px; } .camview__time { display: none; } }
+.camview__id { font-family: var(--q-mono); font-size: 10.5px; font-weight: 600; background: rgba(255, 255, 255, .14); padding: 0 5px; border-radius: 3px; flex: 0 0 auto; }
+.camview__rec { width: 7px; height: 7px; border-radius: 50%; background: #FF4D5E; animation: blink 2s steps(1) infinite; flex: 0 0 auto; }
+.camview__time { font-family: var(--q-mono); font-size: 10.5px; color: #C9D3DE; flex: 0 0 auto; }
+.camview__degraded { position: absolute; top: 6px; left: 6px; font-size: 10.5px; font-weight: 600; color: #3A2A00; background: #FFD166; padding: 1px 6px; border-radius: 3px; }

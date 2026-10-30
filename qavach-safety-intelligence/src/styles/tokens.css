@@ -1,0 +1,74 @@
+/* Design tokens from the Qavach AI-native Command center reference
+   (QAVACH_AI_NATIVE_UI/qavach-ai/src/styles/_tokens.scss), so this module
+   reads as part of Qavach. */
+:root {
+  --q-canvas: #F2F4F7;
+  --q-surface: #FFFFFF;
+  --q-surface-2: #F7F9FB;
+  --q-border: #E1E6EC;
+  --q-divider: #EDF0F4;
+  --q-border-strong: #C9D1DB;
+  --q-border-input: #D5DCE6;
+
+  --q-ink: #0D1B2A;
+  --q-ink-2: #3A4757;
+  --q-muted: #5B6776;
+  --q-faint: #9AA6B4;
+
+  --q-dock: #0A1626;
+  --q-dock-active: #1C2C45;
+  --q-dock-text: #9FADBF;
+  --q-dock-sep: #22334A;
+  --q-dock-avatar: #2A3B55;
+  --q-dock-ai: #8EA8FF;
+  --q-dock-badge: #DCE3EC;
+
+  /* QAI: blue marks anything QAI drafted or suggested */
+  --q-ai: #2D5BFF;
+  --q-ai-ink: #1E40D8;
+  --q-ai-ink-hover: #15309F;
+  --q-ai-deep: #1E3A8A;
+  --q-ai-tint: #EEF2FF;
+  --q-ai-wash: #F6F8FF;
+  --q-ai-border: #CCD7FF;
+  --q-ai-divider: #DCE4FF;
+
+  --q-rising: #B9520C;
+  --q-rising-bg: #FFF0E5;
+  --q-rising-border: #FAD3B5;
+  --q-danger: #B42341;
+  --q-danger-bg: #FDECEF;
+  --q-danger-border: #F6C9D2;
+  --q-warn: #8A6400;
+  --q-warn-bg: #FFF6D9;
+  --q-warn-border: #F2DE9B;
+  --q-warn-dot: #E0A100;
+  --q-good: #1D7363;
+  --q-good-bg: #E3F4EF;
+  --q-good-border: #B8E0D4;
+  --q-live: #3DD68C;
+
+  --q-night: #0B1828;
+  --q-night-2: #0E1D31;
+  --q-night-3: #1B2D45;
+  --q-night-line: #33507A;
+  --q-night-text: #E8EDF3;
+  --q-night-muted: #9FB1C6;
+  --q-night-accent: #7D9BFF;
+  --q-heat-incident: #FF5C7A;
+  --q-heat-high: #FFB45C;
+
+  --q-font: 'Instrument Sans', 'Segoe UI', system-ui, sans-serif;
+  --q-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --q-r-sm: 8px;
+  --q-r: 10px;
+  --q-r-md: 12px;
+  --q-r-lg: 14px;
+  --q-r-xl: 16px;
+  --q-shadow-pop: 0 12px 40px rgba(13, 27, 42, 0.18), 0 2px 6px rgba(13, 27, 42, 0.08);
+  --q-shadow-seg: 0 1px 2px rgba(13, 27, 42, 0.08);
+
+  --q-dock-w: 84px;
+  --q-page-max: 1440px;
+}

@@ -1,0 +1,24 @@
+.ruleai { padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.ruleai__row { display: flex; gap: 10px; align-items: stretch; }
+.ruleai__row .textarea { min-height: 56px; border-color: var(--q-ai-border); }
+.ruleai__row .btn { height: auto; }
+.ruleai .chip--ai { height: auto; min-height: 24px; padding: 3px 10px; white-space: normal; text-align: left; font-weight: 500; }
+.ruleai__out { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 20px; padding: 10px 12px; background: var(--q-surface); border: 1px solid var(--q-ai-divider); border-radius: var(--q-r); color: var(--q-ai-deep); font-size: 13.5px; }
+.ruleai__out ul { margin: 4px 0 0; padding-left: 18px; }
+.ruleai__out p { grid-column: 1 / -1; }
+@media (max-width: 800px) { .ruleai__out { grid-template-columns: 1fr; } .ruleai__row { flex-direction: column; } }
+
+.ruleedit { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr); gap: 16px; align-items: start; }
+@media (max-width: 1000px) { .ruleedit { grid-template-columns: 1fr; } }
+.ruleform { gap: 16px; }
+.ruleform .qai-field .chip--outline { border-color: var(--q-ai-border); }
+.ruleside { position: sticky; top: 76px; }
+.rulesentence { font-size: 15px; line-height: 1.55; }
+.rulesentence .prio { vertical-align: middle; }
+
+.picker__area { margin-bottom: 14px; }
+.picker__areahead { margin-bottom: 6px; }
+.picker__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 6px; }
+.picker__cam { display: flex; align-items: center; gap: 8px; padding: 6px 8px; border: 1px solid var(--q-border); border-radius: var(--q-r-sm); font-size: 13px; cursor: pointer; }
+.picker__cam.is-on { border-color: var(--q-ink); background: var(--q-surface-2); }
+.picker__cam input { accent-color: var(--q-ink); }
