@@ -1,0 +1,472 @@
+/* Model performance (MP-01 to MP-03). Prefix mp-. */
+
+.mp-page {
+  --mp-precision: var(--chart);
+  --mp-recall: #eb6834;
+  --mp-target: var(--offline);
+}
+
+.mp-ucpick {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.mp-ucpick .select {
+  width: auto;
+  max-width: 280px;
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.mp-filterbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px 6px 14px;
+  border: 1px solid var(--brand-tint-line);
+  border-radius: var(--radius);
+  background: var(--brand-tint-2);
+  font-size: 13px;
+}
+
+/* ---------- Trend ---------- */
+
+.mp-trend {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+}
+.mp-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.mp-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.mp-sw {
+  display: inline-block;
+  width: 14px;
+  height: 6px;
+  border-radius: 3px;
+}
+.mp-sw--p {
+  background: var(--mp-precision);
+}
+.mp-sw--r {
+  background: var(--mp-recall);
+}
+.mp-sw--t {
+  height: 0;
+  border-radius: 0;
+  border-top: 2px dashed var(--mp-target);
+}
+
+.mp-chart {
+  width: 100%;
+  min-height: 264px;
+  color: var(--muted);
+}
+.mp-chart svg {
+  display: block;
+  overflow: visible;
+}
+.mp-chart--empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+  padding: 16px;
+}
+.mp-grid {
+  stroke: var(--line-row);
+  stroke-width: 1;
+}
+.mp-axis {
+  stroke: var(--line);
+  stroke-width: 1;
+}
+.mp-tick {
+  font-size: 12px;
+  fill: currentColor;
+}
+.mp-target {
+  stroke: var(--mp-target);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 5;
+}
+.mp-line {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.mp-line--p {
+  stroke: var(--mp-precision);
+}
+.mp-line--r {
+  stroke: var(--mp-recall);
+}
+.mp-pt {
+  stroke: #fff;
+  stroke-width: 1.5;
+}
+.mp-pt--p {
+  fill: var(--mp-precision);
+}
+.mp-pt--r {
+  fill: var(--mp-recall);
+}
+.mp-foot {
+  font-size: 12px;
+  color: var(--subtle);
+}
+
+/* ---------- Use case table ---------- */
+
+.mp-table {
+  min-width: 760px;
+}
+.mp-table thead tr {
+  vertical-align: bottom;
+}
+.mp-th2 {
+  display: block;
+}
+.mp-th2--sub {
+  font-weight: 400;
+}
+.mp-ucname {
+  display: block;
+  padding: 0;
+  min-height: 24px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-weight: 600;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.mp-ucname:hover {
+  color: var(--link);
+  text-decoration: underline;
+}
+.mp-uclink {
+  display: inline-block;
+  font-weight: 600;
+  text-decoration: none;
+}
+.mp-uclink:hover {
+  text-decoration: underline;
+}
+.mp-strong {
+  font-weight: 600;
+}
+.mp-muted {
+  color: var(--muted);
+}
+.mp-warn {
+  color: var(--warn-text);
+}
+.mp-nowrap {
+  white-space: nowrap;
+}
+.mp-gate {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.mp-gate--ok {
+  color: var(--ok-text);
+}
+.mp-gate--warn {
+  color: var(--warn-text);
+}
+.mp-gate--off {
+  gap: 6px;
+  color: var(--muted);
+}
+.mp-tablefoot {
+  padding: 8px 14px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---------- Side panels ---------- */
+
+.mp-side {
+  flex: 1 1 320px;
+  min-width: 0;
+}
+.mp-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 16px;
+}
+.mp-panel__head {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.mp-panel__head h2 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.mp-panel__head span {
+  font-size: 12px;
+  color: var(--subtle);
+}
+.mp-empty {
+  font-size: 13px;
+  color: var(--muted);
+}
+.mp-small {
+  font-size: 12px;
+  color: var(--subtle);
+}
+
+.mp-reasons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+.mp-reasons li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 4px 10px;
+}
+.mp-reasons strong {
+  font-weight: 600;
+}
+.mp-reasons__track {
+  grid-column: 1 / -1;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--line-row);
+}
+.mp-reasons__track > span {
+  display: block;
+  height: 100%;
+  border-radius: 4px;
+  background: var(--chart);
+}
+
+.mp-consent {
+  display: flex;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid #bfe0bf;
+  border-radius: var(--radius);
+  background: var(--ok-tint);
+  color: var(--ok-text);
+  font-size: 12px;
+}
+.mp-consent > span {
+  color: var(--ink-2);
+}
+.mp-consent strong {
+  color: var(--ok-text);
+}
+.mp-consent--none {
+  border-color: #f2c9b6;
+  background: var(--p2-tint);
+  color: var(--p2-text);
+}
+.mp-consent--none strong {
+  color: var(--p2-text);
+}
+
+.mp-dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 7px 16px;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.mp-dl dt {
+  color: var(--muted);
+}
+.mp-dl dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+}
+.mp-dl__sub {
+  display: block;
+  font-size: 12px;
+  font-weight: 400;
+  color: var(--muted);
+}
+.mp-ok {
+  color: var(--ok-text);
+}
+.mp-bad {
+  color: var(--p2-text);
+}
+.mp-details {
+  border-top: 1px solid var(--line-soft);
+  padding-top: 4px;
+  font-size: 13px;
+}
+.mp-details summary {
+  display: flex;
+  align-items: center;
+  min-height: var(--tap);
+  font-weight: 600;
+  color: var(--link);
+  cursor: pointer;
+}
+.mp-details .dl {
+  padding-bottom: 4px;
+}
+
+.mp-reg__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px 8px 4px 16px;
+  min-height: 48px;
+}
+.mp-reg__head h2 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.mp-reg {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+.mp-reg li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 10px;
+  padding: 10px 16px;
+  border-top: 1px solid var(--line-row);
+}
+.mp-reg li.mp-reg--draft {
+  background: #fffbf2;
+}
+.mp-reg__main {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+.mp-reg__v {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-weight: 600;
+}
+.mp-reg__note {
+  font-size: 12px;
+  color: var(--muted);
+}
+.mp-reg__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.mp-reg__warn {
+  color: var(--warn-text);
+}
+.mp-reg__right .btn {
+  min-height: var(--tap);
+}
+.mp-reg__hint {
+  padding: 8px 16px 12px;
+  border-top: 1px solid var(--line-row);
+  font-size: 12px;
+  color: var(--subtle);
+}
+
+.mp-sendlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 13px;
+}
+.mp-sendlist li {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-row);
+}
+.mp-sendlist li:last-child {
+  border-bottom: 0;
+}
+
+@media (max-width: 720px) {
+  .mp-ucpick {
+    flex: 1 1 100%;
+  }
+  .mp-ucpick {
+    min-width: 0;
+    max-width: 100%;
+  }
+  .mp-ucpick .select {
+    flex: 1 1 auto;
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+  }
+}
+
+/* Recent training sends and rollbacks (saved, newest first). */
+.mp-sends {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 8px 0 0;
+  list-style: none;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12px;
+  color: var(--muted);
+}
+.mp-sends li {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.mp-sends strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+.mp-sends--reg {
+  margin: 0 16px 12px;
+}

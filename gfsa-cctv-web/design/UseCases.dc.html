@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Use case set-up · CCTV Monitoring</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D5A93}a:hover{color:#16324F}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #F4F6F8; color: #0E1A26; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; min-height: 56px; padding: 6px 16px; box-sizing: border-box; background: #16324F; color: #FFFFFF">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; color: #FFFFFF; text-decoration: none">
+<span style="display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 7px; background: linear-gradient(135deg, #3E8FD9 0%, #2E74B5 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg></span>
+<span style="font-weight: 600">CCTV Monitoring</span>
+</a>
+<button type="button" aria-label="Tenant: GFSA" style="display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 10px 0 6px; border: 1px solid #3A5F84; border-radius: 6px; background: #1D3D5E; color: #FFFFFF; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer"><span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 4px; background: #FAB219; color: #16324F; font-size: 12px; font-weight: 700">G</span>GFSA<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+<span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 4px; background: #24496F; color: #C9D6E3; font-size: 12px; font-weight: 500">Production</span>
+<button type="button" style="flex: 0 1 400px; display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; border: 1px solid #3A5F84; border-radius: 6px; background: #1D3D5E; color: #C9D6E3; font: inherit; font-size: 13px; text-align: left; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><span style="flex: 1 1 auto">Search vessels, cameras, alarms</span><kbd style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; padding: 1px 6px; border: 1px solid #3A5F84; border-radius: 4px">Ctrl K</kbd></button>
+<div style="margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+<span style="display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px; border-radius: 14px; background: #1D3D5E; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #C9D6E3"><span style="width: 7px; height: 7px; border-radius: 50%; background: #3ACF3A; box-shadow: 0 0 0 3px rgba(58,207,58,0.22)"></span>14:36:20 Asunción</span>
+<button type="button" aria-label="Alarms, 4 open" style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg><span style="position: absolute; top: 6px; right: 5px; display: flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 4px; box-sizing: border-box; border-radius: 9px; background: #C2410C; color: #FFFFFF; font-size: 12px; font-weight: 600">4</span></button>
+<button type="button" aria-label="Help" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"></circle><path d="M9.2 9a3 3 0 0 1 5.6 1c0 2-2.8 2.6-2.8 4"></path><path d="M12 17.5h.01"></path></svg></button>
+<button type="button" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 8px 0 4px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; font: inherit; font-size: 13px; cursor: pointer"><span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2E74B5; font-size: 12px; font-weight: 600">SA</span><span style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2"><span style="font-weight: 600">Safety administrator</span><span style="font-size: 12px; color: #C9D6E3">Configuration rights</span></span></button>
+</div>
+</header>
+
+<div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<nav aria-label="Main" style="flex: 0 0 64px; box-sizing: border-box; padding: 10px; border-right: 1px solid #D9DFE7; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; gap: 2px">
+<a href="Main.dc.html" aria-label="Operations center" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg></a>
+<a href="LiveWall.dc.html" aria-label="Video wall" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"></rect><rect x="13" y="3" width="8" height="8" rx="1"></rect><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect></svg></a>
+<a href="Review.dc.html" aria-label="Alarms and events, 4 open" style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg><span style="position: absolute; top: 6px; right: 5px; width: 8px; height: 8px; border-radius: 50%; background: #C2410C; box-shadow: 0 0 0 2px #FFFFFF"></span></a>
+<a href="Voyage.dc.html" aria-label="Voyages" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="5" r="2"></circle><path d="M8 19h8.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H16"></path></svg></a>
+<span style="width: 28px; height: 1px; margin: 6px 0; background: #E3E8EE"></span>
+<a href="UseCases.dc.html" aria-label="Use cases" aria-current="page" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; background: #E8EEF6; box-shadow: inset 3px 0 0 #2E74B5; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M2 14h4"></path><path d="M10 8h4"></path><path d="M18 16h4"></path></svg></a>
+<a href="Cameras.dc.html" aria-label="Cameras and zones" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"></rect><path d="m16 10 6-3v10l-6-3z"></path></svg></a>
+<a href="AlertRouting.dc.html" aria-label="Alert routing" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4"></path><path d="m15.4 6.5-6.8 4"></path></svg></a>
+<a href="EdgeUnits.dc.html" aria-label="Edge units" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"></path></svg></a>
+<span style="width: 28px; height: 1px; margin: 6px 0; background: #E3E8EE"></span>
+<a href="Reports.dc.html" aria-label="Reports" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h6"></path></svg></a>
+<a href="ModelPerformance.dc.html" aria-label="Model performance" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></a>
+<span style="width: 28px; height: 1px; margin: 6px 0; background: #E3E8EE"></span>
+<a href="Users.dc.html" aria-label="Users and roles" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.9"></path><path d="M16 3.1a4 4 0 0 1 0 7.8"></path></svg></a>
+<a href="AuditLog.dc.html" aria-label="Audit log" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"></path><path d="M3 6h.01M3 12h.01M3 18h.01"></path></svg></a>
+<a href="Integrations.dc.html" aria-label="Integrations" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-5"></path><path d="M9 8V2M15 8V2"></path><path d="M18 8v5a6 6 0 0 1-12 0V8z"></path></svg></a>
+<a href="Plan.dc.html" aria-label="Plan and usage" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path><path d="M6 15h4"></path></svg></a>
+</nav>
+
+<aside aria-labelledby="uc-list-title" style="flex: 0 1 290px; min-width: 0; box-sizing: border-box; border-right: 1px solid #D9DFE7; background: #FFFFFF; display: flex; flex-direction: column">
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 14px 10px; border-bottom: 1px solid #E3E8EE">
+<div style="display: flex; flex-direction: column; gap: 2px"><h2 id="uc-list-title" style="margin: 0; font-size: 14px; font-weight: 600">Use cases</h2><span style="font-size: 12px; color: #5E6A78">12 of 35 from the GFSA workbook set up</span></div>
+<button type="button" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 10px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #5E6A78; font: inherit; font-size: 13px; text-align: left; cursor: pointer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>Filter use cases</button>
+</div>
+<div style="display: flex; flex-direction: column; padding: 4px 6px 8px; font-size: 13px">
+<span style="padding: 12px 10px 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5E6A78">Crew safety</span>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Hard hat and vest</span><span style="font-size: 12px; font-weight: 600; color: #475463">P3</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · alert</span></a>
+<a href="UseCases.dc.html" aria-current="page" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; background: #EAF2FA; box-shadow: inset 3px 0 0 #2E74B5; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span style="font-weight: 600">Life jacket near the water</span><span style="font-size: 12px; font-weight: 600; color: #9A330A">P2</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · alert · draft open</span></a>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Smoking</span><span style="font-size: 12px; font-weight: 600; color: #475463">P3</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · list</span></a>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Person down on deck</span><span style="font-size: 12px; font-weight: 600; color: #475463">P1</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; box-sizing: border-box; border-radius: 50%; border: 1.5px solid #8794A3"></span>Off · needs drill footage</span></a>
+<span style="padding: 12px 10px 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5E6A78">Fire and smoke</span>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Smoke or fire on deck</span><span style="font-size: 12px; font-weight: 600; color: #475463">P1</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · alert</span></a>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Smoke in machinery spaces</span><span style="font-size: 12px; font-weight: 600; color: #475463">P1</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · alert</span></a>
+<span style="padding: 12px 10px 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5E6A78">Water and navigation</span>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Person overboard</span><span style="font-size: 12px; font-weight: 600; color: #475463">P1</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; box-sizing: border-box; border-radius: 50%; border: 1.5px solid #8794A3"></span>Off · needs thermal cameras</span></a>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Obstacle ahead</span><span style="font-size: 12px; font-weight: 600; color: #475463">P3</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · list · bow cameras</span></a>
+<span style="padding: 12px 10px 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5E6A78">Cargo and operations</span>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Container doors opened</span><span style="font-size: 12px; font-weight: 600; color: #475463">P3</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · list</span></a>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Reefer inspection rounds</span><span style="font-size: 12px; font-weight: 600; color: #475463">P3</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · rounds from Connect</span></a>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Person outside planned work</span><span style="font-size: 12px; font-weight: 600; color: #475463">P3</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FAB219"></span>Shadow run · day 4 of 14</span></a>
+<span style="padding: 12px 10px 4px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5E6A78">Scene checks</span>
+<a href="UseCases.dc.html" style="display: flex; flex-direction: column; gap: 1px; padding: 7px 10px; border-radius: 6px; color: #0E1A26; text-decoration: none"><span style="display: flex; justify-content: space-between; gap: 8px"><span>Camera offline or degraded</span><span style="font-size: 12px; font-weight: 600; color: #475463">P3</span></span><span style="display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · every camera</span></a>
+</div>
+<button type="button" style="display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; margin: 4px 12px 14px; border: 1px dashed #9AA7B5; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-weight: 600; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>Add from the workbook</button>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+<div style="flex: 1 1 auto; box-sizing: border-box; padding: 16px 20px 24px; display: flex; flex-direction: column; gap: 14px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px 20px">
+<div style="display: flex; flex-direction: column; gap: 6px">
+<nav aria-label="Breadcrumb" style="font-size: 12px; color: #5E6A78">Configuration / <a href="UseCases.dc.html" style="text-decoration: none">Use cases</a> / Crew safety</nav>
+<h1 style="margin: 0; font-size: 22px; line-height: 1.25; font-weight: 600">Life jacket near the water</h1>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<span style="display: inline-flex; align-items: center; gap: 6px; height: 24px; padding: 0 8px; border-radius: 4px; background: #E5F4E5; color: #006300; font-size: 12px; font-weight: 600"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Live · alerts on since 6 Oct</span>
+<span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 4px; background: #C2410C; color: #FFFFFF; font-size: 12px; font-weight: 600">P2 High</span>
+<span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 4px; background: #FEF4DC; color: #7A4B00; font-size: 12px; font-weight: 600">Draft v1.4.3 · not yet on vessels</span>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<button type="button" style="min-height: 44px; padding: 0 14px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-weight: 600; cursor: pointer">Discard draft</button>
+<button type="button" style="min-height: 44px; padding: 0 14px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-weight: 600; cursor: pointer">Save draft</button>
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 6px; background: #2E74B5; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>Push to vessels</button>
+</div>
+</div>
+
+<div role="tablist" aria-label="Use case" style="display: flex; gap: 4px; border-bottom: 1px solid #D9DFE7">
+<button type="button" role="tab" aria-selected="true" style="min-height: 44px; padding: 0 12px; border: 0; border-bottom: 2px solid #2E74B5; background: transparent; color: #0E1A26; font: inherit; font-weight: 600; cursor: pointer">Set-up</button>
+<button type="button" role="tab" aria-selected="false" style="min-height: 44px; padding: 0 12px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #475463; font: inherit; cursor: pointer">Response steps</button>
+<button type="button" role="tab" aria-selected="false" style="min-height: 44px; padding: 0 12px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #475463; font: inherit; cursor: pointer">Versions 6</button>
+<button type="button" role="tab" aria-selected="false" style="min-height: 44px; padding: 0 12px; border: 0; border-bottom: 2px solid transparent; background: transparent; color: #475463; font: inherit; cursor: pointer">Audit log</button>
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 16px">
+
+<div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+
+<section aria-labelledby="lvl-title" style="border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px">
+<h2 id="lvl-title" style="margin: 0; font-size: 14px; font-weight: 600"><span style="color: #5E6A78; font-weight: 500">1</span> · Level and priority</h2>
+<label style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px">Priority<select style="min-height: 40px; padding: 0 8px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #0E1A26; font: inherit; font-weight: 600"><option>P2 High</option><option>P1 Critical</option><option>P3 Medium</option><option>P4 Low</option></select></label>
+</div>
+<div role="radiogroup" aria-labelledby="lvl-title" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(190px, 100%), 1fr)); gap: 10px">
+<label style="display: flex; gap: 10px; padding: 12px 14px; border: 1px solid #C9D2DC; border-radius: 6px; cursor: pointer"><input type="radio" name="level" style="flex: none; width: 18px; height: 18px; margin: 2px 0 0; accent-color: #2E74B5"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Record and list</span><span style="font-size: 13px; color: #475463">Log each event with a clip. No alerts.</span></span></label>
+<label style="display: flex; gap: 10px; padding: 12px 14px; border: 2px solid #2E74B5; border-radius: 6px; background: #F2F7FC; cursor: pointer"><input type="radio" name="level" checked style="flex: none; width: 18px; height: 18px; margin: 2px 0 0; accent-color: #2E74B5"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Record and alert</span><span style="font-size: 13px; color: #475463">Also alert the people in step 5 in real time.</span></span></label>
+<label style="display: flex; gap: 10px; padding: 12px 14px; border: 1px dashed #C9D2DC; border-radius: 6px; background: #F7F8FA; color: #5E6A78; cursor: not-allowed"><input type="radio" name="level" disabled style="flex: none; width: 18px; height: 18px; margin: 2px 0 0"><span style="display: flex; flex-direction: column; gap: 2px"><span style="font-weight: 600">Record and act</span><span style="font-size: 13px">Raise a task in Connect. Opens once the pilot proves accuracy.</span></span></label>
+</div>
+</section>
+
+<section aria-labelledby="zone-title" style="border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px">
+<h2 id="zone-title" style="margin: 0; font-size: 14px; font-weight: 600"><span style="color: #5E6A78; font-weight: 500">2</span> · Cameras and zones</h2>
+<span style="font-size: 13px; color: #475463">7 barge edge cameras on 3 convoys</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px">
+<label style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; border: 1px solid #2E74B5; border-radius: 6px; background: #F2F7FC; font-size: 13px; cursor: pointer"><input type="checkbox" checked style="width: 16px; height: 16px; margin: 0; accent-color: #2E74B5">Guarán F 501 · Port edge</label>
+<label style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; border: 2px solid #2E74B5; border-radius: 6px; background: #E3EEF9; font-size: 13px; font-weight: 600; cursor: pointer"><input type="checkbox" checked style="width: 16px; height: 16px; margin: 0; accent-color: #2E74B5">Guarán F 503 · Port edge · editing</label>
+<label style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; border: 1px solid #2E74B5; border-radius: 6px; background: #F2F7FC; font-size: 13px; cursor: pointer"><input type="checkbox" checked style="width: 16px; height: 16px; margin: 0; accent-color: #2E74B5">GF Humaitá convoy · 3 edge cameras</label>
+<label style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; border: 1px solid #2E74B5; border-radius: 6px; background: #F2F7FC; font-size: 13px; cursor: pointer"><input type="checkbox" checked style="width: 16px; height: 16px; margin: 0; accent-color: #2E74B5">GF Boquerón convoy · 2 edge cameras</label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<div style="flex: 999 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 8px">
+<div role="toolbar" aria-label="Zone tools" style="display: flex; flex-wrap: wrap; gap: 6px">
+<button type="button" aria-pressed="true" style="display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #16324F; border-radius: 6px; background: #16324F; color: #FFFFFF; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Draw zone</button>
+<button type="button" aria-pressed="false" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; cursor: pointer">Draw line</button>
+<button type="button" aria-pressed="false" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; cursor: pointer">Move points</button>
+<button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; cursor: pointer">Copy to F 501</button>
+</div>
+<div style="position: relative; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000000">
+<img src="/_blob/f4d5873df19cc070c29e36fe1ab6c2f2" alt="Reference view of the port edge camera on Guarán F 503 with the water edge zone drawn along the hull" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%"><polygon points="17.19,100 45.31,100 60.31,27.78 58.75,27.78" fill="#FF8A4C" fill-opacity="0.22" stroke="#FF8A4C" stroke-width="2" vector-effect="non-scaling-stroke"></polygon></svg>
+<span style="position: absolute; left: 17.19%; top: 100%; width: 14px; height: 14px; margin: -14px 0 0 -7px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; border: 2px solid #16324F"></span>
+<span style="position: absolute; left: 45.31%; top: 100%; width: 14px; height: 14px; margin: -14px 0 0 -7px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; border: 2px solid #16324F"></span>
+<span style="position: absolute; left: 60.31%; top: 27.78%; width: 14px; height: 14px; margin: -7px 0 0 -7px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; border: 2px solid #16324F"></span>
+<span style="position: absolute; left: 58.75%; top: 27.78%; width: 14px; height: 14px; margin: -7px 0 0 -11px; box-sizing: border-box; border-radius: 3px; background: #FFFFFF; border: 2px solid #16324F"></span>
+<span style="position: absolute; left: 36%; top: 62%; display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 4px; background: #FF8A4C; color: #1A0E08; font-size: 12px; font-weight: 600; white-space: nowrap">Water edge, port</span>
+<span style="position: absolute; left: 10px; top: 10px; display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px">Reference view · F503-CAM-02</span>
+</div>
+</div>
+<div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 13px; font-weight: 600">Zones on this camera</span>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border: 2px solid #2E74B5; border-radius: 6px; background: #F2F7FC">
+<span style="display: flex; align-items: center; gap: 8px; font-weight: 600"><span style="width: 12px; height: 12px; border-radius: 3px; background: #FF8A4C"></span>Water edge, port</span>
+<span style="font-size: 12px; color: #475463">Polygon · 4 points · along the hull line</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 4px; padding: 10px 12px; border: 1px solid #DCE1E7; border-radius: 6px">
+<span style="display: flex; align-items: center; gap: 8px; font-weight: 500"><span style="width: 12px; height: 2px; background: #2E74B5"></span>Hull line</span>
+<span style="font-size: 12px; color: #475463">Line · used by objects thrown overboard</span>
+</div>
+<p style="margin: 0; font-size: 12px; color: #5E6A78">If the camera is moved, the scene check flags it and these zones need redrawing.</p>
+</div>
+</div>
+</section>
+
+<section aria-labelledby="rule-title" style="border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px">
+<h2 id="rule-title" style="margin: 0; font-size: 14px; font-weight: 600"><span style="color: #5E6A78; font-weight: 500">3</span> · Model and rule</h2>
+<span style="font-size: 13px; color: #475463">Base detector v2.1 → Crew safety attributes v1.4</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; font-size: 15px; line-height: 2">
+<span>Raise an event when a</span>
+<select aria-label="Object" style="min-height: 40px; padding: 0 8px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #0E1A26; font: inherit; font-weight: 600"><option>person</option></select>
+<span>is inside</span>
+<select aria-label="Zone" style="min-height: 40px; padding: 0 8px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #0E1A26; font: inherit; font-weight: 600"><option>Water edge, port</option></select>
+<span>without a</span>
+<select aria-label="Missing item" style="min-height: 40px; padding: 0 8px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #0E1A26; font: inherit; font-weight: 600"><option>life jacket</option></select>
+<span>for at least</span>
+<input aria-label="Seconds" type="number" value="5" style="width: 64px; min-height: 40px; box-sizing: border-box; padding: 0 8px; border: 1px solid #C9D2DC; border-radius: 6px; color: #0E1A26; font: inherit; font-weight: 600">
+<span>seconds.</span>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(230px, 100%), 1fr)); gap: 16px">
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">Confidence needed<span style="display: flex; align-items: center; gap: 12px"><input type="range" min="0.3" max="0.95" step="0.05" value="0.6" style="flex: 1 1 auto; accent-color: #2E74B5"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 500">0.60</span></span><span style="font-weight: 400; color: #5E6A78">Raise it to cut false alerts, lower it to miss fewer events</span></label>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 13px; font-weight: 600">Repeat events<span style="display: flex; align-items: center; gap: 8px; font-weight: 400">One per person every<input type="number" value="10" style="width: 64px; min-height: 40px; box-sizing: border-box; padding: 0 8px; border: 1px solid #C9D2DC; border-radius: 6px; color: #0E1A26; font: inherit; font-weight: 600">min</span><span style="font-weight: 400; color: #5E6A78">Tracking keeps one person from raising a flood of alarms</span></label>
+</div>
+</section>
+
+<section aria-labelledby="when-title" style="border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); padding: 14px 16px; display: flex; flex-direction: column; gap: 12px">
+<h2 id="when-title" style="margin: 0; font-size: 14px; font-weight: 600"><span style="color: #5E6A78; font-weight: 500">4</span> · When it runs</h2>
+<div role="radiogroup" aria-labelledby="when-title" style="display: flex; flex-wrap: wrap; gap: 8px">
+<label style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1px solid #C9D2DC; border-radius: 6px; cursor: pointer"><input type="radio" name="when" style="width: 16px; height: 16px; margin: 0; accent-color: #2E74B5">Always</label>
+<label style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 2px solid #2E74B5; border-radius: 6px; background: #F2F7FC; font-weight: 600; cursor: pointer"><input type="radio" name="when" checked style="width: 16px; height: 16px; margin: 0; accent-color: #2E74B5">Under way or mooring</label>
+<label style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1px solid #C9D2DC; border-radius: 6px; cursor: pointer"><input type="radio" name="when" style="width: 16px; height: 16px; margin: 0; accent-color: #2E74B5">Cargo operations</label>
+<label style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px; border: 1px solid #C9D2DC; border-radius: 6px; cursor: pointer"><input type="radio" name="when" style="width: 16px; height: 16px; margin: 0; accent-color: #2E74B5">Set hours</label>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463">Voyage status comes from the operational schedule in Connect, so the check follows GFSA's own plan.</p>
+</section>
+
+<section aria-labelledby="who-title" style="border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); overflow: hidden">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; padding: 14px 16px 10px">
+<h2 id="who-title" style="margin: 0; font-size: 14px; font-weight: 600"><span style="color: #5E6A78; font-weight: 500">5</span> · Who gets the alarm</h2>
+<span style="font-size: 13px; color: #475463">Response steps are on their own tab</span>
+</div>
+<div style="overflow-x: auto">
+<table style="width: 100%; min-width: 540px; border-collapse: collapse; font-size: 13px">
+<thead>
+<tr style="background: #F6F8FA; color: #475463; text-align: left; font-size: 12px">
+<th scope="col" style="padding: 8px 16px; border-top: 1px solid #E3E8EE; border-bottom: 1px solid #E3E8EE; font-weight: 600">When</th>
+<th scope="col" style="padding: 8px 10px; border-top: 1px solid #E3E8EE; border-bottom: 1px solid #E3E8EE; font-weight: 600">Who</th>
+<th scope="col" style="padding: 8px 10px; border-top: 1px solid #E3E8EE; border-bottom: 1px solid #E3E8EE; font-weight: 600">How</th>
+<th scope="col" style="padding: 8px 16px 8px 10px; border-top: 1px solid #E3E8EE; border-bottom: 1px solid #E3E8EE; font-weight: 600">Hours</th>
+</tr>
+</thead>
+<tbody>
+<tr><td style="padding: 10px 16px; border-bottom: 1px solid #EEF1F4">At once, on board</td><td style="padding: 10px; border-bottom: 1px solid #EEF1F4; font-weight: 600">Wheelhouse display</td><td style="padding: 10px; border-bottom: 1px solid #EEF1F4">Screen and buzzer, works without the link</td><td style="padding: 10px 16px 10px 10px; border-bottom: 1px solid #EEF1F4">Always</td></tr>
+<tr><td style="padding: 10px 16px; border-bottom: 1px solid #EEF1F4">At once, ashore</td><td style="padding: 10px; border-bottom: 1px solid #EEF1F4; font-weight: 600">Duty officer</td><td style="padding: 10px; border-bottom: 1px solid #EEF1F4">WhatsApp and SMS</td><td style="padding: 10px 16px 10px 10px; border-bottom: 1px solid #EEF1F4">24 hours</td></tr>
+<tr><td style="padding: 10px 16px; border-bottom: 1px solid #EEF1F4">Not acknowledged in <strong>5 min</strong></td><td style="padding: 10px; border-bottom: 1px solid #EEF1F4; font-weight: 600">Operations manager</td><td style="padding: 10px; border-bottom: 1px solid #EEF1F4">WhatsApp and email</td><td style="padding: 10px 16px 10px 10px; border-bottom: 1px solid #EEF1F4">24 hours</td></tr>
+<tr><td style="padding: 10px 16px">Not acknowledged in <strong>15 min</strong></td><td style="padding: 10px; font-weight: 600">Fleet superintendent</td><td style="padding: 10px">SMS and email</td><td style="padding: 10px 16px 10px 10px">24 hours</td></tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+
+<aside style="flex: 1 1 300px; min-width: 0; display: flex; flex-direction: column; gap: 14px">
+<section aria-labelledby="gate-title" style="border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); padding: 14px 16px; display: flex; flex-direction: column; gap: 14px">
+<div style="display: flex; flex-direction: column; gap: 2px">
+<h2 id="gate-title" style="margin: 0; font-size: 14px; font-weight: 600">Accuracy against the agreed targets</h2>
+<span style="font-size: 12px; color: #475463">Passed the 14-day shadow run on 5 Oct</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px"><span style="font-size: 13px; color: #475463">Precision</span><span style="display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: #006300"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Met</span></div>
+<span style="font-size: 22px; font-weight: 600; line-height: 1.1">93%<span style="margin-left: 8px; font-size: 13px; font-weight: 400; color: #5E6A78">target 90% or more</span></span>
+<div aria-hidden="true" style="position: relative; height: 8px; border-radius: 4px; background: #D6E6F5"><div style="width: 93%; height: 100%; border-radius: 4px; background: #2E74B5"></div><div style="position: absolute; left: 90%; top: -3px; width: 2px; height: 14px; background: #0E1A26"></div></div>
+<span style="font-size: 12px; color: #5E6A78">25 of 27 alarms accepted since 6 Oct</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px"><span style="font-size: 13px; color: #475463">Recall</span><span style="display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: #006300"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Met</span></div>
+<span style="font-size: 22px; font-weight: 600; line-height: 1.1">88%<span style="margin-left: 8px; font-size: 13px; font-weight: 400; color: #5E6A78">target 85% or more</span></span>
+<div aria-hidden="true" style="position: relative; height: 8px; border-radius: 4px; background: #D6E6F5"><div style="width: 88%; height: 100%; border-radius: 4px; background: #2E74B5"></div><div style="position: absolute; left: 85%; top: -3px; width: 2px; height: 14px; background: #0E1A26"></div></div>
+<span style="font-size: 12px; color: #5E6A78">412 held-out GFSA clips</span>
+</div>
+<div style="display: flex; flex-direction: column; gap: 6px">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px"><span style="font-size: 13px; color: #475463">False alerts per camera per day</span><span style="display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 600; color: #006300"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Met</span></div>
+<span style="font-size: 22px; font-weight: 600; line-height: 1.1">0.03<span style="margin-left: 8px; font-size: 13px; font-weight: 400; color: #5E6A78">limit 2 or fewer</span></span>
+<span style="font-size: 12px; color: #5E6A78">2 false alerts on 7 cameras in 9 days live</span>
+</div>
+</section>
+
+<section aria-labelledby="fa-title" style="border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); padding: 14px 16px; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; flex-direction: column; gap: 2px"><h2 id="fa-title" style="margin: 0; font-size: 14px; font-weight: 600">Why false alerts happen</h2><span style="font-size: 12px; color: #5E6A78">6 false alerts since 22 Sep, shadow run included</span></div>
+<div style="display: flex; flex-direction: column; gap: 8px; font-size: 13px">
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 10px"><span>Inflatable life jacket worn</span><span style="font-weight: 600">3</span><div aria-hidden="true" style="grid-column: 1 / -1; height: 8px; border-radius: 4px; background: #EEF1F4"><div style="width: 100%; height: 100%; border-radius: 4px; background: #2a78d6"></div></div></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 10px"><span>Reflection or shadow</span><span style="font-weight: 600">2</span><div aria-hidden="true" style="grid-column: 1 / -1; height: 8px; border-radius: 4px; background: #EEF1F4"><div style="width: 66.7%; height: 100%; border-radius: 4px; background: #2a78d6"></div></div></div>
+<div style="display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 4px 10px"><span>Outside the zone</span><span style="font-weight: 600">1</span><div aria-hidden="true" style="grid-column: 1 / -1; height: 8px; border-radius: 4px; background: #EEF1F4"><div style="width: 33.3%; height: 100%; border-radius: 4px; background: #2a78d6"></div></div></div>
+</div>
+<p style="margin: 0; font-size: 12px; color: #5E6A78">Inflatable jackets are in the training set for the next model update.</p>
+<button type="button" style="min-height: 44px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-weight: 600; cursor: pointer">Send these clips to training</button>
+</section>
+
+<section aria-labelledby="ver-title" style="border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); overflow: hidden">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px; padding: 14px 16px 10px"><h2 id="ver-title" style="margin: 0; font-size: 14px; font-weight: 600">Versions on vessels</h2><a href="EdgeUnits.dc.html" style="font-size: 13px; font-weight: 600; text-decoration: none">All 6</a></div>
+<ol style="list-style: none; margin: 0; padding: 0; font-size: 13px">
+<li style="display: flex; justify-content: space-between; gap: 10px; padding: 10px 16px; border-top: 1px solid #EEF1F4; background: #FFFBF2"><span style="display: flex; flex-direction: column"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600">v1.4.3</span><span style="font-size: 12px; color: #475463">Draft · you · today</span></span><span style="font-size: 12px; color: #7A4B00">Not pushed</span></li>
+<li style="display: flex; justify-content: space-between; gap: 10px; padding: 10px 16px; border-top: 1px solid #EEF1F4"><span style="display: flex; flex-direction: column"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600">v1.4.2</span><span style="font-size: 12px; color: #475463; white-space: nowrap">Live · pushed 12 Oct</span></span><span style="display: flex; flex-direction: column; align-items: flex-end; font-size: 12px; color: #475463; white-space: nowrap"><span>6 of 10 units</span><span>4 waiting for link</span></span></li>
+<li style="display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 16px; border-top: 1px solid #EEF1F4"><span style="display: flex; flex-direction: column"><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-weight: 600">v1.4.1</span><span style="font-size: 12px; color: #475463">Signed · 5 Oct</span></span><button type="button" style="min-height: 36px; padding: 0 10px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Roll back</button></li>
+</ol>
+</section>
+</aside>
+</div>
+</div>
+
+<footer style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 20px; min-height: 36px; padding: 6px 20px; box-sizing: border-box; border-top: 1px solid #D9DFE7; background: #FFFFFF; font-size: 12px; color: #475463">
+<span>Changes are signed and pushed to edge units in port or on a strong link</span>
+<span style="margin-left: auto">Production · GFSA tenant · v2026.10.2</span>
+</footer>
+</main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1660}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

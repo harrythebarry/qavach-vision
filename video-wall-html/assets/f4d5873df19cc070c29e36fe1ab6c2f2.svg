@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" width="640" height="360">
+<defs>
+<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#6C8193"></stop><stop offset="1" stop-color="#B3BFC8"></stop></linearGradient>
+<linearGradient id="water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#806F56"></stop><stop offset="1" stop-color="#463C31"></stop></linearGradient>
+<linearGradient id="deck" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#62676D"></stop><stop offset="1" stop-color="#383C41"></stop></linearGradient>
+<radialGradient id="vig" cx="0.5" cy="0.5" r="0.78"><stop offset="0.55" stop-color="#000" stop-opacity="0"></stop><stop offset="1" stop-color="#000" stop-opacity="0.5"></stop></radialGradient>
+<pattern id="corr" width="7" height="10" patternUnits="userSpaceOnUse"><rect width="2" height="10" fill="#000" fill-opacity="0.18"></rect></pattern>
+</defs>
+<rect width="640" height="100" fill="url(#sky)"></rect>
+<path d="M0 91 Q 40 87 80 90 Q 120 93 160 89 Q 200 86 240 90 Q 280 93 320 88 Q 360 85 400 90 Q 440 93 480 89 Q 520 86 560 90 Q 600 93 640 89 V 102 H 0 Z" fill="#56614F"></path>
+<rect y="98" width="640" height="262" fill="url(#water)"></rect>
+<g stroke="#97866D" stroke-width="2" stroke-linecap="round" opacity="0.55">
+<line x1="250" y1="120" x2="290" y2="120"></line>
+<line x1="180" y1="140" x2="225" y2="140"></line>
+<line x1="60" y1="170" x2="110" y2="170"></line>
+<line x1="200" y1="170" x2="240" y2="170"></line>
+<line x1="20" y1="210" x2="70" y2="210"></line>
+<line x1="140" y1="210" x2="175" y2="210"></line>
+<line x1="40" y1="260" x2="90" y2="260"></line>
+<line x1="10" y1="300" x2="50" y2="300"></line>
+<line x1="90" y1="300" x2="120" y2="300"></line>
+<line x1="20" y1="340" x2="60" y2="340"></line>
+</g>
+<polygon points="110,360 640,360 640,100 376,100" fill="url(#deck)"></polygon>
+<g stroke="#767C82" stroke-width="1.2" opacity="0.7">
+<line x1="141" y1="330" x2="640" y2="330"></line>
+<line x1="194" y1="280" x2="624" y2="280"></line>
+<line x1="233" y1="240" x2="569" y2="240"></line>
+<line x1="269" y1="205" x2="521" y2="205"></line>
+<line x1="294" y1="180" x2="487" y2="180"></line>
+</g>
+<polygon points="96,360 124,360 380,100 374,100" fill="#8C9298"></polygon>
+<polygon points="124,360 136,360 382,100 380,100" fill="#C9A227"></polygon>
+<g fill="#2A2E32">
+<rect x="172" y="300" width="9" height="16" rx="2"></rect>
+<rect x="186" y="296" width="9" height="16" rx="2"></rect>
+</g>
+<g fill="#4A4F55">
+<ellipse cx="176.5" cy="300" rx="4.5" ry="1.8"></ellipse>
+<ellipse cx="190.5" cy="296" rx="4.5" ry="1.8"></ellipse>
+</g>
+<polygon points="440,82 520,58.8 520,131.6 440,114" fill="#BFC5CA"></polygon>
+<polygon points="520,58.8 600,35.6 600,149.2 520,131.6" fill="#3E6B4F"></polygon>
+<polygon points="600,35.6 640,24 640,158 600,149.2" fill="#2F5D7C"></polygon>
+<polygon points="440,114 520,131.6 520,204.4 440,146" fill="#2F5D7C"></polygon>
+<polygon points="520,131.6 600,149.2 600,262.8 520,204.4" fill="#8C4A32"></polygon>
+<polygon points="600,149.2 640,158 640,292 600,262.8" fill="#6F7780"></polygon>
+<polygon points="440,82 640,24 640,292 440,146" fill="url(#corr)"></polygon>
+<g stroke="#22262A" stroke-width="2">
+<line x1="440" y1="82" x2="440" y2="146"></line>
+<line x1="520" y1="58.8" x2="520" y2="204.4"></line>
+<line x1="600" y1="35.6" x2="600" y2="262.8"></line>
+<line x1="440" y1="114" x2="640" y2="158"></line>
+</g>
+<polygon points="440,146 640,292 640,300 440,150" fill="#24282C"></polygon>
+<rect width="640" height="360" fill="url(#vig)"></rect>
+</svg>

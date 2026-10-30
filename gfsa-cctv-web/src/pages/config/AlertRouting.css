@@ -1,0 +1,662 @@
+/* Alert routing (RT-01 to RT-05). Class prefix: ar- */
+
+.ar-side {
+  flex: 1 1 340px;
+  min-width: 0;
+}
+
+.ar-nowrap {
+  white-space: nowrap;
+}
+
+.ar-note {
+  padding: 8px 14px 0;
+  font-size: 12px;
+  color: var(--subtle);
+}
+
+.ar-head-stack {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 0;
+}
+.ar-head-stack h2 {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Text-style button used in card headers (design: navy, 13px, 600). */
+.ar-linkbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--tap);
+  padding: 0 10px;
+  border: 0;
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--navy);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.ar-linkbtn:hover {
+  background: var(--surface-2);
+}
+.ar-linkbtn[aria-pressed='true'] {
+  background: var(--brand-tint);
+}
+.ar-linkbtn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.ar-inline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: var(--tap);
+  margin-left: 4px;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: var(--link);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ar-inline-btn:hover {
+  color: var(--link-hover);
+}
+
+.ar-danger {
+  color: var(--p2-text);
+}
+.ar-danger:hover {
+  color: var(--p1);
+}
+
+.ar-changed {
+  color: var(--warn-text);
+  font-weight: 600;
+}
+
+/* ---------- RT-01 ladders ---------- */
+
+.ar-ladders {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+  gap: 12px;
+  padding: 14px 16px;
+}
+.ar-ladder {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overflow: hidden;
+}
+.ar-ladder.is-editing {
+  border-color: var(--brand);
+  box-shadow: 0 0 0 1px var(--brand);
+}
+.ar-ladder__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  min-height: 44px;
+  padding: 6px 14px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.ar-ladder__head h3 {
+  margin: 0;
+}
+.ar-ladder__hint {
+  font-size: 12px;
+  color: var(--subtle);
+  text-align: right;
+}
+.ar-ladder__steps {
+  flex: 1 1 auto;
+  list-style: none;
+  margin: 0;
+  padding: 14px 14px 4px;
+  display: flex;
+  flex-direction: column;
+}
+.ar-ladder__step {
+  display: flex;
+  gap: 12px;
+}
+.ar-ladder__rail {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 10px;
+  padding-top: 5px;
+}
+.ar-ladder__dot {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--brand);
+}
+.ar-ladder__dot--board {
+  background: var(--navy);
+}
+.ar-ladder__line {
+  flex: 1 1 auto;
+  width: 2px;
+  background: var(--line);
+}
+.ar-ladder__text {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-bottom: 14px;
+}
+.ar-ladder__step:last-child .ar-ladder__text {
+  padding-bottom: 10px;
+}
+.ar-ladder__when {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.ar-ladder__who {
+  font-weight: 600;
+}
+.ar-ladder__detail {
+  font-size: 12px;
+  color: var(--muted);
+}
+.ar-ladder__foot {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px 4px;
+  border-top: 1px solid var(--line-row);
+}
+
+/* ---------- Ladder editor ---------- */
+
+.ar-editor {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 16px 16px;
+  padding: 14px;
+  border: 1px solid var(--brand-tint-line);
+  border-radius: var(--radius);
+  background: var(--brand-tint-2);
+}
+.ar-editor__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ar-editor__title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+.ar-editor__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.ar-step-edit {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 12px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.ar-step-edit__n {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  margin-bottom: 8px;
+  border-radius: 50%;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+}
+.ar-step-edit__when {
+  flex: 1 1 190px;
+}
+.ar-step-edit__min {
+  flex: 0 0 96px;
+}
+.ar-step-edit__who {
+  flex: 1 1 200px;
+}
+.ar-step-edit__ch {
+  flex: 3 1 300px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+.ar-step-edit__ch legend {
+  padding: 0;
+  font-size: 13px;
+  font-weight: 600;
+}
+.ar-step-edit__checks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 14px;
+}
+.ar-step-edit__fixed {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  font-size: 13px;
+  color: var(--muted);
+}
+.ar-step-edit__actions {
+  display: flex;
+  margin-left: auto;
+}
+.ar-editor__foot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ---------- RT-02 recipients ---------- */
+
+.ar-person {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.ar-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--brand-tint);
+  color: var(--navy);
+  font-size: 12px;
+  font-weight: 600;
+}
+.ar-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.ar-rec td {
+  vertical-align: middle;
+}
+.ar-verify {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+}
+.ar-verify--ok {
+  color: var(--ok-text);
+}
+.ar-verify--warn {
+  color: var(--warn-text);
+}
+.ar-verify--muted {
+  color: var(--muted);
+}
+
+/* ---------- Compact tables in the side column ---------- */
+
+.ar-compact th,
+.ar-compact td {
+  padding: 8px;
+}
+.ar-rowhead {
+  text-align: left;
+  font-weight: 600;
+  background: transparent;
+}
+.ar-compact tbody th {
+  padding: 9px 8px 9px 14px;
+  border-bottom: 1px solid var(--line-row);
+}
+.ar-compact tbody tr:last-child th {
+  border-bottom: 0;
+}
+.ar-failed {
+  color: var(--p2-text);
+  font-weight: 600;
+}
+.ar-card-foot {
+  display: flex;
+  padding: 10px 14px 14px;
+}
+
+/* ---------- RT-03 rota ---------- */
+
+.ar-rota-now {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--surface-3);
+  font-size: 13px;
+}
+.ar-rota-now .dot {
+  margin-top: 6px;
+}
+.ar-rota-now__sub {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.ar-rota__day {
+  font-weight: 400;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.ar-rota tr.is-today {
+  background: var(--brand-tint-2);
+}
+.ar-rota tr.is-today th {
+  box-shadow: inset 3px 0 0 var(--brand);
+}
+.ar-today {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--link);
+}
+.ar-onnow {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  margin-left: 6px;
+  padding: 0 6px;
+  border-radius: var(--radius-sm);
+  background: var(--ok-tint);
+  color: var(--ok-text);
+  font-size: 12px;
+  font-weight: 600;
+}
+.ar-rota__select {
+  min-width: 150px;
+  padding: 0 8px;
+}
+
+/* ---------- RT-03 rules ---------- */
+
+.ar-rules {
+  margin: 0;
+  padding: 4px 14px 6px;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+.ar-rules > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-row);
+}
+.ar-rules > div:last-child {
+  border-bottom: 0;
+}
+.ar-rules dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.ar-rules dd {
+  margin: 0;
+}
+.ar-inline-fields {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 10px;
+}
+.ar-inline-fields label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.ar-inline-fields .select {
+  width: auto;
+  min-width: 86px;
+}
+
+/* ---------- RT-04 template ---------- */
+
+.ar-tpl {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 16px;
+}
+.ar-tpl__main {
+  flex: 1 1 320px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ar-tpl__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+.ar-tpl__textarea {
+  font-size: 13px;
+  line-height: 1.5;
+}
+.ar-tpl__insert {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.ar-ph {
+  display: inline-flex;
+  align-items: center;
+  min-height: var(--tap);
+  padding: 0 10px;
+  border: 1px dashed var(--line-input);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--navy);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  cursor: pointer;
+}
+.ar-ph:hover {
+  border-color: var(--brand);
+  background: var(--brand-tint-2);
+}
+.ar-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--brand-tint-2);
+  font-size: 13px;
+  overflow-wrap: anywhere;
+}
+.ar-preview__prio {
+  color: var(--p2-text);
+  font-weight: 600;
+}
+.ar-preview__link {
+  font-size: 12px;
+}
+.ar-preview__unknown {
+  background: var(--warn-tint);
+  color: var(--warn-text);
+  border-radius: 2px;
+  padding: 0 2px;
+}
+.ar-sentnote {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.ar-sentnote .dot {
+  width: 7px;
+  height: 7px;
+  margin-top: 5px;
+}
+.ar-tpl__meta {
+  flex: 1 1 240px;
+  min-width: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 13px;
+}
+.ar-tpl__meta > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ar-tpl__meta dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.ar-tpl__meta dd {
+  margin: 0;
+}
+
+/* ---------- RT-05 test result ---------- */
+
+.ar-test {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 10px 14px 0;
+  padding: 10px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  background: var(--surface-3);
+  font-size: 13px;
+}
+.ar-test__title {
+  font-weight: 600;
+}
+.ar-test ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ar-test li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+/* ---------- Unsaved changes bar ---------- */
+
+.ar-savebar {
+  position: sticky;
+  bottom: 12px;
+  z-index: 15;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 10px;
+  padding: 10px 12px 10px 16px;
+  border-radius: var(--radius);
+  background: var(--navy);
+  color: #fff;
+  box-shadow: var(--shadow-pop);
+  font-size: 13px;
+}
+.ar-savebar__text {
+  flex: 1 1 240px;
+  min-width: 0;
+}
+.ar-savebar__warn {
+  color: var(--tenant);
+}
+
+/* People flagged from Users and roles (suspended, invited, removed). */
+.ar-flag {
+  display: block;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--subtle);
+}
+.ar-flag--bad {
+  color: var(--p2-text);
+}
+
+/* Open alarms that follow a ladder right now. */
+.ar-inuse {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0 14px 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  font-size: 12px;
+}
+.ar-inuse__title {
+  font-weight: 600;
+  color: var(--subtle);
+}
+.ar-inuse ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.ar-inuse li {
+  line-height: 1.4;
+}
+.ar-inuse a {
+  font-weight: 600;
+}
+.ar-inuse__count,
+.ar-inuse__muted {
+  color: var(--subtle);
+}
+.ar-inuse__after {
+  display: block;
+}

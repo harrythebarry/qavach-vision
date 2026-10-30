@@ -1,0 +1,85 @@
+/* Design tokens taken from the CCTV Monitoring design canvas (see /design). */
+:root {
+  /* Brand and chrome */
+  --navy: #16324f;
+  --navy-2: #1d3d5e;
+  --navy-3: #24496f;
+  --navy-line: #3a5f84;
+  --on-navy-muted: #c9d6e3;
+  --brand: #2e74b5;
+  --brand-bright: #3e8fd9;
+  --brand-tint: #e8eef6;
+  --brand-tint-2: #f2f7fc;
+  --brand-tint-line: #d6e6f5;
+  --tenant: #fab219;
+  --chart: #2a78d6;
+
+  /* Ink */
+  --ink: #0e1a26;
+  --ink-2: #2b3846;
+  --muted: #475463;
+  --subtle: #5e6a78;
+  --link: #1d5a93;
+  --link-hover: #16324f;
+
+  /* Surfaces and lines */
+  --bg: #f4f6f8;
+  --surface: #ffffff;
+  --surface-2: #f6f8fa;
+  --surface-3: #f8fafb;
+  --line: #d9dfe7;
+  --line-input: #c9d2dc;
+  --line-soft: #e3e8ee;
+  --line-row: #eef1f4;
+
+  /* Status */
+  --ok: #0ca30c;
+  --ok-text: #006300;
+  --ok-tint: #e5f4e5;
+  --ok-glow: #3acf3a;
+  --warn: #fab219;
+  --warn-text: #7a4b00;
+  --warn-tint: #fef4dc;
+  --offline: #8794a3;
+  --neutral-tint: #edf0f4;
+  --neutral-text: #3b4756;
+
+  /* Priorities */
+  --p1: #a32424;
+  --p1-tint: #fceaea;
+  --p2: #c2410c;
+  --p2-text: #9a330a;
+  --p2-tint: #fdf6f3;
+  --p2-tint-strong: #fdf1ec;
+  --p3: #fab219;
+  --p3-text: #7a4b00;
+  --p3-tint: #fef4dc;
+  --p4: #b8c1cb;
+  --p4-text: #3b4756;
+  --p4-tint: #edf0f4;
+
+  /* Detection overlay */
+  --overlay: #ff8a4c;
+  --overlay-ink: #1a0e08;
+
+  /* Wheelhouse (night) */
+  --wh-bg: #0a1016;
+  --wh-bar: #0e151c;
+  --wh-panel: #121a22;
+  --wh-panel-2: #1a2530;
+  --wh-line: #1f2b37;
+  --wh-line-2: #33424f;
+  --wh-ink: #e6edf3;
+  --wh-muted: #9fb0c2;
+
+  /* Type */
+  --font-sans: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  /* Shape */
+  --radius: 6px;
+  --radius-sm: 4px;
+  --shadow-card: 0 1px 2px rgba(14, 26, 38, 0.05);
+  --shadow-pop: 0 6px 24px rgba(14, 26, 38, 0.16);
+  --tap: 44px;
+}

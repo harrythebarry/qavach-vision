@@ -1,0 +1,326 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Integrations · CCTV Monitoring</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D5A93}a:hover{color:#16324F}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #F4F6F8; color: #0E1A26; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; min-height: 56px; padding: 6px 16px; box-sizing: border-box; background: #16324F; color: #FFFFFF">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; color: #FFFFFF; text-decoration: none">
+<span style="display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 7px; background: linear-gradient(135deg, #3E8FD9 0%, #2E74B5 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg></span>
+<span style="font-weight: 600">CCTV Monitoring</span>
+</a>
+<button type="button" aria-label="Tenant: GFSA" style="display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 10px 0 6px; border: 1px solid #3A5F84; border-radius: 6px; background: #1D3D5E; color: #FFFFFF; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer"><span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 4px; background: #FAB219; color: #16324F; font-size: 12px; font-weight: 700">G</span>GFSA<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+<span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 4px; background: #24496F; color: #C9D6E3; font-size: 12px; font-weight: 500">Production</span>
+<button type="button" style="flex: 0 1 400px; display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; border: 1px solid #3A5F84; border-radius: 6px; background: #1D3D5E; color: #C9D6E3; font: inherit; font-size: 13px; text-align: left; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><span style="flex: 1 1 auto">Search vessels, cameras, alarms</span><kbd style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; padding: 1px 6px; border: 1px solid #3A5F84; border-radius: 4px">Ctrl K</kbd></button>
+<div style="margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+<span style="display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px; border-radius: 14px; background: #1D3D5E; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #C9D6E3"><span style="width: 7px; height: 7px; border-radius: 50%; background: #3ACF3A; box-shadow: 0 0 0 3px rgba(58,207,58,0.22)"></span>14:36:20 Asunción</span>
+<button type="button" aria-label="Alarms, 4 open" style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg><span style="position: absolute; top: 6px; right: 5px; display: flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 4px; box-sizing: border-box; border-radius: 9px; background: #C2410C; color: #FFFFFF; font-size: 12px; font-weight: 600">4</span></button>
+<button type="button" aria-label="Help" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"></circle><path d="M9.2 9a3 3 0 0 1 5.6 1c0 2-2.8 2.6-2.8 4"></path><path d="M12 17.5h.01"></path></svg></button>
+<button type="button" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 8px 0 4px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; font: inherit; font-size: 13px; cursor: pointer"><span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2E74B5; font-size: 12px; font-weight: 600">TA</span><span style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2"><span style="font-weight: 600">Tenant administrator</span><span style="font-size: 12px; color: #C9D6E3">Full rights</span></span></button>
+</div>
+</header>
+
+<div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<nav aria-label="Main" style="flex: 1 1 232px; max-width: 100%; box-sizing: border-box; padding: 12px 10px 16px; border-right: 1px solid #D9DFE7; background: #FFFFFF; display: flex; flex-direction: column; gap: 2px">
+<span style="padding: 8px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5E6A78">Operations</span>
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg>Operations center</a>
+<a href="LiveWall.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"></rect><rect x="13" y="3" width="8" height="8" rx="1"></rect><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect></svg>Video wall</a>
+<a href="Review.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg><span style="flex: 1 1 auto">Alarms and events</span><span style="display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 20px; padding: 0 6px; box-sizing: border-box; border-radius: 10px; background: #C2410C; color: #FFFFFF; font-size: 12px; font-weight: 600">4</span></a>
+<a href="Voyage.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="5" r="2"></circle><path d="M8 19h8.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H16"></path></svg>Voyages</a>
+<span style="padding: 14px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5E6A78">Configuration</span>
+<a href="UseCases.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M2 14h4"></path><path d="M10 8h4"></path><path d="M18 16h4"></path></svg>Use cases</a>
+<a href="Cameras.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"></rect><path d="m16 10 6-3v10l-6-3z"></path></svg>Cameras and zones</a>
+<a href="AlertRouting.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4"></path><path d="m15.4 6.5-6.8 4"></path></svg>Alert routing</a>
+<a href="EdgeUnits.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"></path></svg>Edge units</a>
+<span style="padding: 14px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5E6A78">Insights</span>
+<a href="Reports.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h6"></path></svg>Reports</a>
+<a href="ModelPerformance.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>Model performance</a>
+<span style="padding: 14px 12px 6px; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: #5E6A78">Administration</span>
+<a href="Users.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.9"></path><path d="M16 3.1a4 4 0 0 1 0 7.8"></path></svg>Users and roles</a>
+<a href="AuditLog.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"></path><path d="M3 6h.01M3 12h.01M3 18h.01"></path></svg>Audit log</a>
+<a href="Integrations.dc.html" aria-current="page" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; background: #E8EEF6; box-shadow: inset 3px 0 0 #2E74B5; color: #16324F; font-weight: 600; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-5"></path><path d="M9 8V2M15 8V2"></path><path d="M18 8v5a6 6 0 0 1-12 0V8z"></path></svg><span style="flex: 1 1 auto">Integrations</span><span style="display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 400; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Connect</span></a>
+<a href="Plan.dc.html" style="display: flex; align-items: center; gap: 12px; min-height: 44px; padding: 0 12px; border-radius: 6px; color: #2B3846; text-decoration: none"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path><path d="M6 15h4"></path></svg>Plan and usage</a>
+<div style="margin-top: auto; display: flex; flex-direction: column; gap: 4px; margin-left: 2px; margin-right: 2px; padding: 12px; border: 1px solid #E3E8EE; border-radius: 6px; background: #F8FAFB">
+<span style="display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 600"><span style="width: 8px; height: 8px; border-radius: 50%; background: #0CA30C"></span>Shore services running</span>
+<span style="font-size: 12px; color: #475463">6 of 10 edge units reporting · 4 on GF Humaitá out of coverage</span>
+</div>
+</nav>
+
+<main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+<div style="flex: 1 1 auto; width: 100%; max-width: 1440px; box-sizing: border-box; padding: 20px 24px 24px; display: flex; flex-direction: column; gap: 16px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 20px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<nav aria-label="Breadcrumb" style="font-size: 12px; color: #5E6A78"><a href="Users.dc.html" style="text-decoration: none">Administration</a> / Integrations</nav>
+<h1 style="margin: 0; font-size: 22px; line-height: 1.25; font-weight: 600">Integrations</h1>
+<p style="margin: 0; font-size: 13px; color: #475463">Connect, messaging, positions, recorders and storage</p>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px">
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 16px; border: 0; border-radius: 6px; background: #2E74B5; color: #FFFFFF; font: inherit; font-weight: 600; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14"></path><path d="M5 12h14"></path></svg>Add integration</button>
+</div>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr)); gap: 16px">
+
+<article aria-labelledby="int-connect" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05)">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: #E8EEF6; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h15"></path><path d="m15 4 4 4-4 4"></path><path d="M20 16H5"></path><path d="m9 12-4 4 4 4"></path></svg></span>
+<h2 id="int-connect" style="flex: 1 1 auto; min-width: 0; margin: 0; font-size: 14px; font-weight: 600">Connect</h2>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E5F4E5; color: #006300; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Connected</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463; text-wrap: balance">Voyages, schedule and cargo&nbsp;in; events and port times out</p>
+<p style="margin: 0; font-size: 12px; color: #475463; font-variant-numeric: tabular-nums">Synced <span style="font-family: 'IBM Plex Mono', ui-monospace, monospace">14:35</span> · every 5 min</p>
+<button type="button" aria-label="Configure Connect" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Configure</button>
+</article>
+
+<article aria-labelledby="int-whatsapp" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05)">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: #E8EEF6; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"></path></svg></span>
+<h2 id="int-whatsapp" style="flex: 1 1 auto; min-width: 0; margin: 0; font-size: 14px; font-weight: 600">WhatsApp messaging</h2>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E5F4E5; color: #006300; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Connected</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463; text-wrap: balance">Alerts to shore roles with the clip page link</p>
+<p style="margin: 0; font-size: 12px; color: #475463; font-variant-numeric: tabular-nums">141 of 142 delivered, 7 days</p>
+<button type="button" aria-label="Configure WhatsApp messaging" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Configure</button>
+</article>
+
+<article aria-labelledby="int-sms" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05)">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: #E8EEF6; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="2" width="12" height="20" rx="2"></rect><path d="M11 18h2"></path></svg></span>
+<h2 id="int-sms" style="flex: 1 1 auto; min-width: 0; margin: 0; font-size: 14px; font-weight: 600">SMS gateway</h2>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E5F4E5; color: #006300; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Connected</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463; text-wrap: balance">Fallback and escalation messages</p>
+<p style="margin: 0; font-size: 12px; color: #475463; font-variant-numeric: tabular-nums">140 of 142 delivered, 7 days</p>
+<button type="button" aria-label="Configure SMS gateway" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Configure</button>
+</article>
+
+<article aria-labelledby="int-email" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05)">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: #E8EEF6; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"></rect><path d="m3 7 9 6 9-6"></path></svg></span>
+<h2 id="int-email" style="flex: 1 1 auto; min-width: 0; margin: 0; font-size: 14px; font-weight: 600">Email</h2>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E5F4E5; color: #006300; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Connected</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463; text-wrap: balance">Escalations, digests and daily reports</p>
+<p style="margin: 0; font-size: 12px; color: #475463; font-variant-numeric: tabular-nums">GFSA mail server · 61 sent, 7 days</p>
+<button type="button" aria-label="Configure Email" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Configure</button>
+</article>
+
+<article aria-labelledby="int-positions" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05)">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: #E8EEF6; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="7"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg></span>
+<h2 id="int-positions" style="flex: 1 1 auto; min-width: 0; margin: 0; font-size: 14px; font-weight: 600">Vessel positions</h2>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 4px; background: #FEF4DC; color: #7A4B00; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 2 20h20z"></path><path d="M12 9v5"></path><path d="M12 17.5h.01"></path></svg>Attention</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463; text-wrap: balance">GPS from each edge unit every minute · AIS optional</p>
+<p style="margin: 0; font-size: 12px; color: #475463; font-variant-numeric: tabular-nums">2 of 3 convoys reporting · GF Humaitá out of coverage</p>
+<button type="button" aria-label="Configure Vessel positions" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Configure</button>
+</article>
+
+<article aria-labelledby="int-recorders" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05)">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: #E8EEF6; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="12" rx="2"></rect><circle cx="7.5" cy="12" r="2"></circle><path d="M13 12h5"></path></svg></span>
+<h2 id="int-recorders" style="flex: 1 1 auto; min-width: 0; margin: 0; font-size: 14px; font-weight: 600">Video recorders</h2>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E5F4E5; color: #006300; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Connected</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463; text-wrap: balance">RTSP streams from the recorders on each vessel</p>
+<p style="margin: 0; font-size: 12px; color: #475463; font-variant-numeric: tabular-nums">30 cameras on 3 convoys</p>
+<button type="button" aria-label="Configure Video recorders" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Configure</button>
+</article>
+
+<article aria-labelledby="int-reefer" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05)">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: #E8EEF6; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0z"></path></svg></span>
+<h2 id="int-reefer" style="flex: 1 1 auto; min-width: 0; margin: 0; font-size: 14px; font-weight: 600">Reefer monitoring</h2>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 4px; background: #EDF0F4; color: #3B4756; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" aria-hidden="true"><path d="M6 12h12"></path></svg>Not configured</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463; text-wrap: balance">Match reefer alarms to the video of the affected row</p>
+<p style="margin: 0; font-size: 12px; color: #475463">Where fitted</p>
+<button type="button" aria-label="Set up Reefer monitoring" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Set up</button>
+</article>
+
+<article aria-labelledby="int-sso" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05)">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: #E8EEF6; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="7.5" cy="15.5" r="5"></circle><path d="m11 12 9-9"></path><path d="m16 7 3 3"></path><path d="m19 4 2 2"></path></svg></span>
+<h2 id="int-sso" style="flex: 1 1 auto; min-width: 0; margin: 0; font-size: 14px; font-weight: 600">Single sign-on (SAML)</h2>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E5F4E5; color: #006300; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Connected</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463; text-wrap: balance">Sign in with the GFSA directory, MFA enforced</p>
+<p style="margin: 0; font-size: 12px; color: #475463; font-variant-numeric: tabular-nums">14 users</p>
+<button type="button" aria-label="Configure Single sign-on (SAML)" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Configure</button>
+</article>
+
+<article aria-labelledby="int-storage" style="display: flex; flex-direction: column; gap: 10px; padding: 16px; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05)">
+<div style="display: flex; align-items: center; gap: 12px">
+<span style="flex: none; display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 6px; background: #E8EEF6; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"></ellipse><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"></path><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"></path></svg></span>
+<h2 id="int-storage" style="flex: 1 1 auto; min-width: 0; margin: 0; font-size: 14px; font-weight: 600">Object storage</h2>
+<span style="flex: none; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E5F4E5; color: #006300; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"></path></svg>Connected</span>
+</div>
+<p style="margin: 0; font-size: 13px; color: #475463; text-wrap: balance">Clips 90 days, events 12 months, encrypted at rest</p>
+<p style="margin: 0; font-size: 12px; color: #475463; font-variant-numeric: tabular-nums">2.1 of 5 TB used</p>
+<button type="button" aria-label="Configure Object storage" style="align-self: flex-start; margin-top: auto; display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Configure</button>
+</article>
+
+</div>
+
+<div style="display: flex; flex-wrap: wrap; align-items: stretch; gap: 16px">
+
+<section aria-labelledby="map-title" style="flex: 999 1 560px; min-width: 0; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); overflow: hidden">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; min-height: 48px; padding: 4px 8px 4px 14px; box-sizing: border-box; border-bottom: 1px solid #E3E8EE">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px"><h2 id="map-title" style="margin: 0; font-size: 14px; font-weight: 600; white-space: nowrap">Connect · field mapping</h2><span style="font-size: 12px; color: #5E6A78">5 objects in · 4 out · every 5 min</span></div>
+</div>
+<div style="overflow-x: auto">
+<table style="width: 100%; min-width: 680px; border-collapse: collapse; font-size: 13px; font-variant-numeric: tabular-nums">
+<thead>
+<tr style="background: #F6F8FA; color: #475463; text-align: left; font-size: 12px">
+<th scope="col" style="padding: 8px 14px; font-weight: 600; border-bottom: 1px solid #E3E8EE; white-space: nowrap">Connect object</th>
+<th scope="col" style="padding: 8px 10px; font-weight: 600; border-bottom: 1px solid #E3E8EE">Direction</th>
+<th scope="col" style="padding: 8px 10px; font-weight: 600; border-bottom: 1px solid #E3E8EE; white-space: nowrap">Console use</th>
+<th scope="col" style="padding: 8px 10px; font-weight: 600; border-bottom: 1px solid #E3E8EE; text-align: right; white-space: nowrap">Last sync</th>
+<th scope="col" style="padding: 8px 14px 8px 10px; font-weight: 600; border-bottom: 1px solid #E3E8EE; text-align: right">Records</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #EEF1F4; font-weight: 600; white-space: nowrap">Voyages</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4"><span style="display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E3EEF9; color: #16324F; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 7 7 17"></path><path d="M16 17H7V8"></path></svg>In</span></td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4">Voyage record, schedule and status</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4; text-align: right; font-family: 'IBM Plex Mono', ui-monospace, monospace; white-space: nowrap">14:35</td>
+<td style="padding: 10px 14px 10px 10px; border-bottom: 1px solid #EEF1F4; text-align: right; white-space: nowrap">3</td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #EEF1F4; font-weight: 600; white-space: nowrap">Convoy make-up</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4"><span style="display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E3EEF9; color: #16324F; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 7 7 17"></path><path d="M16 17H7V8"></path></svg>In</span></td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4">Tug and barge groups, camera trees</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4; text-align: right; font-family: 'IBM Plex Mono', ui-monospace, monospace; white-space: nowrap">14:35</td>
+<td style="padding: 10px 14px 10px 10px; border-bottom: 1px solid #EEF1F4; text-align: right; white-space: nowrap">3</td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #EEF1F4; font-weight: 600; white-space: nowrap">Operational schedule</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4"><span style="display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E3EEF9; color: #16324F; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 7 7 17"></path><path d="M16 17H7V8"></path></svg>In</span></td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4">When use cases run, port calls</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4; text-align: right; font-family: 'IBM Plex Mono', ui-monospace, monospace; white-space: nowrap">14:35</td>
+<td style="padding: 10px 14px 10px 10px; border-bottom: 1px solid #EEF1F4; text-align: right; white-space: nowrap">9 calls</td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #EEF1F4; font-weight: 600; white-space: nowrap">Cargo lists</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4"><span style="display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E3EEF9; color: #16324F; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 7 7 17"></path><path d="M16 17H7V8"></path></svg>In</span></td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4">Container count check</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4; text-align: right; font-family: 'IBM Plex Mono', ui-monospace, monospace; white-space: nowrap">14:35</td>
+<td style="padding: 10px 14px 10px 10px; border-bottom: 1px solid #EEF1F4; text-align: right; white-space: nowrap">84 containers</td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #EEF1F4; font-weight: 600; white-space: nowrap">Reefer round times</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4"><span style="display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 4px; background: #E3EEF9; color: #16324F; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 7 7 17"></path><path d="M16 17H7V8"></path></svg>In</span></td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4">Round compliance</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4; text-align: right; font-family: 'IBM Plex Mono', ui-monospace, monospace; white-space: nowrap">14:35</td>
+<td style="padding: 10px 14px 10px 10px; border-bottom: 1px solid #EEF1F4; text-align: right; white-space: nowrap">every 6 h</td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #EEF1F4; font-weight: 600; white-space: nowrap">Events</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4"><span style="display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 4px; background: #EDF0F4; color: #3B4756; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>Out</span></td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4">On the voyage record</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4; text-align: right; font-family: 'IBM Plex Mono', ui-monospace, monospace; white-space: nowrap">14:35</td>
+<td style="padding: 10px 14px 10px 10px; border-bottom: 1px solid #EEF1F4; text-align: right; white-space: nowrap">41 this voyage</td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #EEF1F4; font-weight: 600; white-space: nowrap">Actual port times</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4"><span style="display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 4px; background: #EDF0F4; color: #3B4756; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>Out</span></td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4">Beside the schedule</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4; text-align: right; font-family: 'IBM Plex Mono', ui-monospace, monospace; white-space: nowrap">11 Oct 06:12</td>
+<td style="padding: 10px 14px 10px 10px; border-bottom: 1px solid #EEF1F4; text-align: right; white-space: nowrap">1</td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; border-bottom: 1px solid #EEF1F4; font-weight: 600; white-space: nowrap">Container differences</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4"><span style="display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 4px; background: #EDF0F4; color: #3B4756; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>Out</span></td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4">Flagged on the cargo list</td>
+<td style="padding: 10px; border-bottom: 1px solid #EEF1F4; text-align: right; font-family: 'IBM Plex Mono', ui-monospace, monospace; white-space: nowrap">11 Oct 07:40</td>
+<td style="padding: 10px 14px 10px 10px; border-bottom: 1px solid #EEF1F4; text-align: right; white-space: nowrap">1</td>
+</tr>
+<tr>
+<td style="padding: 10px 14px; font-weight: 600; white-space: nowrap">Missed reefer rounds</td>
+<td style="padding: 10px"><span style="display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px; border-radius: 4px; background: #EDF0F4; color: #3B4756; font-size: 12px; font-weight: 600; white-space: nowrap"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7"></path><path d="M8 7h9v9"></path></svg>Out</span></td>
+<td style="padding: 10px">Task on the voyage</td>
+<td style="padding: 10px; text-align: right; font-family: 'IBM Plex Mono', ui-monospace, monospace; white-space: nowrap">14 Oct 02:16</td>
+<td style="padding: 10px 14px 10px 10px; text-align: right; white-space: nowrap">1</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+
+<section aria-labelledby="log-title" style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; box-shadow: 0 1px 2px rgba(14,26,38,0.05); overflow: hidden">
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; min-height: 48px; padding: 4px 8px 4px 14px; box-sizing: border-box; border-bottom: 1px solid #E3E8EE">
+<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px"><h2 id="log-title" style="margin: 0; font-size: 14px; font-weight: 600; white-space: nowrap">Connect sync log</h2><span style="font-size: 12px; color: #5E6A78">Newest first</span></div>
+<button type="button" style="display: inline-flex; align-items: center; gap: 6px; min-height: 40px; padding: 0 10px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12a9 9 0 1 1-2.64-6.36"></path><path d="M21 3v6h-6"></path></svg>Sync now</button>
+</div>
+<ol style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; font-size: 13px; font-variant-numeric: tabular-nums">
+<li style="display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 2px 12px; padding: 12px 14px; border-bottom: 1px solid #EEF1F4">
+<time datetime="2026-10-15T14:35:02" style="font-family: 'IBM Plex Mono', ui-monospace, monospace">14:35:02</time>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600"><span style="flex: none; width: 8px; height: 8px; border-radius: 50%; background: #0CA30C"></span>OK</span>
+<span style="grid-column: 2; font-size: 12px; color: #475463">3 voyages, 1 schedule change</span>
+</li>
+<li style="display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 2px 12px; padding: 12px 14px; border-bottom: 1px solid #EEF1F4">
+<time datetime="2026-10-15T14:30:01" style="font-family: 'IBM Plex Mono', ui-monospace, monospace">14:30:01</time>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600"><span style="flex: none; width: 8px; height: 8px; border-radius: 50%; background: #0CA30C"></span>OK</span>
+<span style="grid-column: 2; font-size: 12px; color: #475463">No changes</span>
+</li>
+<li style="display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 2px 12px; padding: 12px 14px; border-bottom: 1px solid #EEF1F4">
+<time datetime="2026-10-15T14:25:01" style="font-family: 'IBM Plex Mono', ui-monospace, monospace">14:25:01</time>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600"><span style="flex: none; width: 8px; height: 8px; border-radius: 50%; background: #0CA30C"></span>OK</span>
+<span style="grid-column: 2; font-size: 12px; color: #475463">2 cargo list updates (<span style="font-family: 'IBM Plex Mono', ui-monospace, monospace">VOY-26-040</span>)</span>
+</li>
+<li style="display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 2px 12px; padding: 12px 14px; border-bottom: 1px solid #EEF1F4">
+<time datetime="2026-10-15T14:20:03" style="font-family: 'IBM Plex Mono', ui-monospace, monospace">14:20:03</time>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600"><span style="flex: none; width: 8px; height: 8px; border-radius: 50%; background: #0CA30C"></span>OK</span>
+<span style="grid-column: 2; font-size: 12px; color: #475463">No changes</span>
+</li>
+<li style="display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 2px 12px; padding: 12px 14px; border-bottom: 1px solid #EEF1F4">
+<time datetime="2026-10-15T14:15:01" style="font-family: 'IBM Plex Mono', ui-monospace, monospace">14:15:01</time>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600"><span style="flex: none; width: 8px; height: 8px; border-radius: 50%; background: #FAB219"></span>Retried once</span>
+<span style="grid-column: 2; font-size: 12px; color: #475463">Timeout after 8 s, then OK</span>
+</li>
+<li style="display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: baseline; gap: 2px 12px; padding: 12px 14px">
+<time datetime="2026-10-15T14:10:01" style="font-family: 'IBM Plex Mono', ui-monospace, monospace">14:10:01</time>
+<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600"><span style="flex: none; width: 8px; height: 8px; border-radius: 50%; background: #0CA30C"></span>OK</span>
+<span style="grid-column: 2; font-size: 12px; color: #475463">No changes</span>
+</li>
+</ol>
+<a href="AuditLog.dc.html" style="margin-top: auto; display: flex; align-items: center; justify-content: center; min-height: 44px; border-top: 1px solid #E3E8EE; font-size: 13px; font-weight: 600; text-decoration: none">Full log in the audit log</a>
+</section>
+
+</div>
+</div>
+
+<footer style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 20px; min-height: 36px; padding: 6px 24px; box-sizing: border-box; border-top: 1px solid #D9DFE7; background: #FFFFFF; font-size: 12px; color: #475463">
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Event service connected</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Connect synced 14:35</span>
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FAB219"></span>4 edge units not reporting</span>
+<span style="margin-left: auto">Production · GFSA tenant · v2026.10.2</span>
+</footer>
+</main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1280}}'>
+class Component extends DCLogic {
+renderVals() {
+return {};
+}
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,390 @@
+/* Plan and usage (ADM-05). Prefix plan-. */
+
+.plan-row {
+  align-items: stretch;
+}
+.plan-card {
+  display: flex;
+  flex-direction: column;
+}
+.plan-card--main {
+  flex: 999 1 560px;
+}
+.plan-card--side {
+  flex: 1 1 340px;
+  min-width: 0;
+}
+.plan-sidecol {
+  display: flex;
+  flex-direction: column;
+}
+
+.plan-linkbtn {
+  border: 0;
+  background: transparent;
+  color: var(--link);
+  cursor: pointer;
+  min-height: var(--tap);
+}
+.plan-linkbtn:hover {
+  color: var(--link-hover);
+}
+.plan-linkbtn:disabled {
+  color: var(--subtle);
+  cursor: not-allowed;
+}
+
+.plan-banner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line-soft);
+  background: var(--surface-2);
+}
+.plan-banner__name {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 600;
+}
+.plan-banner__name .badge {
+  gap: 5px;
+  padding: 0 8px;
+}
+.plan-banner__agr {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.plan-ent {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 0 32px;
+  margin: 0;
+  padding: 2px 16px 0;
+}
+.plan-ent > div {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--line-row);
+}
+.plan-ent dt {
+  flex: none;
+  white-space: nowrap;
+  color: var(--muted);
+}
+.plan-ent dd {
+  margin: 0;
+  text-align: right;
+}
+.plan-ent strong {
+  font-weight: 600;
+}
+.plan-ent__sub {
+  color: var(--muted);
+}
+.plan-ent > .plan-ent__wide {
+  grid-column: 1 / -1;
+  border-bottom: 0;
+}
+
+.plan-foot {
+  margin-top: auto;
+  padding: 10px 16px;
+  border-top: 1px solid var(--line-soft);
+  background: var(--surface-2);
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* ---------- Usage ---------- */
+
+.plan-usage-head {
+  padding-right: 4px;
+}
+.plan-usage {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 14px 16px 16px;
+}
+.plan-usage .segmented {
+  align-self: flex-start;
+}
+.plan-usage .callout > svg {
+  flex: none;
+  margin-top: 2px;
+}
+.plan-meter {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.plan-meter__top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+}
+.plan-meter__label {
+  font-weight: 600;
+}
+.plan-over {
+  margin-left: 8px;
+}
+.plan-meter__note {
+  font-size: 12px;
+  color: var(--muted);
+}
+.plan-meter__note.is-over {
+  color: var(--p2-text);
+  font-weight: 600;
+}
+
+/* ---------- Invoices ---------- */
+
+.plan-inv {
+  min-width: 600px;
+}
+.plan-nowrap {
+  white-space: nowrap;
+}
+.plan-inv .badge {
+  gap: 5px;
+  padding: 0 8px;
+}
+.plan-inv td.plan-doc {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.plan-pdf {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: var(--tap);
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: var(--link);
+  font-weight: 600;
+  cursor: pointer;
+}
+.plan-pdf:hover {
+  color: var(--link-hover);
+}
+.plan-pdf:disabled {
+  color: var(--subtle);
+  cursor: not-allowed;
+}
+
+/* ---------- Health and support ---------- */
+
+.plan-health {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 2px 16px 4px;
+}
+.plan-health > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line-row);
+}
+.plan-health > div:last-child {
+  border-bottom: 0;
+  padding-bottom: 6px;
+}
+.plan-health dt {
+  font-size: 12px;
+  color: var(--muted);
+}
+.plan-health dd {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 8px;
+}
+.plan-strong {
+  font-weight: 600;
+}
+.plan-health__sub {
+  font-size: 12px;
+  color: var(--muted);
+}
+.plan-status-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: var(--tap);
+  font-weight: 600;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.plan-support {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.plan-support__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 16px 16px;
+}
+.plan-support__lines {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.plan-support__lines > span {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.plan-support__lines svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--navy);
+}
+.plan-cases {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 10px 12px;
+  list-style: none;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  font-size: 13px;
+}
+.plan-cases li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+}
+.plan-cases__subject {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.plan-full {
+  width: 100%;
+}
+.plan-account {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: var(--tap);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---------- Dialogs ---------- */
+
+.plan-prios {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.plan-prios legend {
+  margin-bottom: 6px;
+  padding: 0;
+}
+.plan-prio {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: var(--tap);
+  padding: 10px 12px;
+  border: 1px solid var(--line-input);
+  border-radius: var(--radius);
+  font-size: 13px;
+  cursor: pointer;
+}
+.plan-prio.is-on {
+  border-color: var(--brand);
+  background: var(--brand-tint-2);
+}
+.plan-prio input {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--brand);
+}
+.plan-prio__note {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.plan-err {
+  color: var(--p2-text);
+}
+
+/* ---------- Change requests and cases ---------- */
+
+.plan-reqs {
+  padding: 4px 16px 12px;
+}
+.plan-reqs__title {
+  margin: 8px 0 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+.plan-reqs ul {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: 13px;
+}
+.plan-reqs li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+}
+.plan-reqs li.is-off {
+  color: var(--muted);
+}
+.plan-reqs__meta {
+  flex: 1 1 220px;
+  min-width: 0;
+  font-size: 12px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.plan-reqs__btn {
+  font-size: 13px;
+  font-weight: 600;
+}
+.plan-cases__meta {
+  flex-basis: 100%;
+  font-size: 12px;
+  color: var(--muted);
+}

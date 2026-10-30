@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Video wall · CCTV Monitoring</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap">
+<style>
+body{margin:0}
+a{color:#1D5A93}a:hover{color:#16324F}
+</style>
+</helmet>
+<div style="min-height: 100vh; display: flex; flex-direction: column; background: #F4F6F8; color: #0E1A26; font-family: 'IBM Plex Sans', 'Segoe UI', system-ui, sans-serif; font-size: 14px; line-height: 1.45">
+
+<header style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 14px; min-height: 56px; padding: 6px 16px; box-sizing: border-box; background: #16324F; color: #FFFFFF">
+<a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; min-height: 44px; color: #FFFFFF; text-decoration: none">
+<span style="display: flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 7px; background: linear-gradient(135deg, #3E8FD9 0%, #2E74B5 100%); box-shadow: inset 0 0 0 1px rgba(255,255,255,0.14)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="3"></circle></svg></span>
+<span style="font-weight: 600">CCTV Monitoring</span>
+</a>
+<button type="button" aria-label="Tenant: GFSA" style="display: inline-flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 10px 0 6px; border: 1px solid #3A5F84; border-radius: 6px; background: #1D3D5E; color: #FFFFFF; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer"><span style="display: inline-flex; align-items: center; justify-content: center; width: 22px; height: 22px; border-radius: 4px; background: #FAB219; color: #16324F; font-size: 12px; font-weight: 700">G</span>GFSA<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+<span style="display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 4px; background: #24496F; color: #C9D6E3; font-size: 12px; font-weight: 500">Production</span>
+<button type="button" style="flex: 0 1 400px; display: flex; align-items: center; gap: 10px; min-height: 40px; padding: 0 12px; border: 1px solid #3A5F84; border-radius: 6px; background: #1D3D5E; color: #C9D6E3; font: inherit; font-size: 13px; text-align: left; cursor: pointer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg><span style="flex: 1 1 auto">Search vessels, cameras, alarms</span><kbd style="font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; padding: 1px 6px; border: 1px solid #3A5F84; border-radius: 4px">Ctrl K</kbd></button>
+<div style="margin-left: auto; display: flex; flex-wrap: wrap; align-items: center; gap: 6px">
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 12px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; font: inherit; font-size: 13px; cursor: pointer">All convoys<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+<span style="display: inline-flex; align-items: center; gap: 7px; height: 28px; padding: 0 10px; border-radius: 14px; background: #1D3D5E; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px; color: #C9D6E3"><span style="width: 7px; height: 7px; border-radius: 50%; background: #3ACF3A; box-shadow: 0 0 0 3px rgba(58,207,58,0.22)"></span>14:36:20 Asunción</span>
+<button type="button" aria-label="Alarms, 4 open" style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg><span style="position: absolute; top: 6px; right: 5px; display: flex; align-items: center; justify-content: center; min-width: 18px; height: 18px; padding: 0 4px; box-sizing: border-box; border-radius: 9px; background: #C2410C; color: #FFFFFF; font-size: 12px; font-weight: 600">4</span></button>
+<button type="button" aria-label="Help" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; cursor: pointer"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9.5"></circle><path d="M9.2 9a3 3 0 0 1 5.6 1c0 2-2.8 2.6-2.8 4"></path><path d="M12 17.5h.01"></path></svg></button>
+<button type="button" style="display: flex; align-items: center; gap: 8px; min-height: 44px; padding: 0 8px 0 4px; border: 0; border-radius: 6px; background: transparent; color: #FFFFFF; font: inherit; font-size: 13px; cursor: pointer"><span style="display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; border-radius: 50%; background: #2E74B5; font-size: 12px; font-weight: 600">DO</span><span style="display: flex; flex-direction: column; align-items: flex-start; line-height: 1.2"><span style="font-weight: 600">Duty officer</span><span style="font-size: 12px; color: #C9D6E3">Shore operations</span></span></button>
+</div>
+</header>
+
+<div style="flex: 1 1 auto; display: flex; flex-wrap: wrap; align-items: stretch">
+
+<nav aria-label="Main" style="flex: 0 0 64px; box-sizing: border-box; padding: 10px 10px; border-right: 1px solid #D9DFE7; background: #FFFFFF; display: flex; flex-direction: column; align-items: center; gap: 2px">
+<a href="Main.dc.html" aria-label="Operations center" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="9" rx="1"></rect><rect x="14" y="3" width="7" height="5" rx="1"></rect><rect x="14" y="12" width="7" height="9" rx="1"></rect><rect x="3" y="16" width="7" height="5" rx="1"></rect></svg></a>
+<a href="LiveWall.dc.html" aria-label="Video wall" aria-current="page" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; background: #E8EEF6; box-shadow: inset 3px 0 0 #2E74B5; color: #16324F"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="8" height="8" rx="1"></rect><rect x="13" y="3" width="8" height="8" rx="1"></rect><rect x="3" y="13" width="8" height="8" rx="1"></rect><rect x="13" y="13" width="8" height="8" rx="1"></rect></svg></a>
+<a href="Review.dc.html" aria-label="Alarms and events, 4 open" style="position: relative; display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.7 21a2 2 0 0 1-3.4 0"></path></svg><span style="position: absolute; top: 6px; right: 5px; width: 8px; height: 8px; border-radius: 50%; background: #C2410C; box-shadow: 0 0 0 2px #FFFFFF"></span></a>
+<a href="Voyage.dc.html" aria-label="Voyages" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="6" cy="19" r="2"></circle><circle cx="18" cy="5" r="2"></circle><path d="M8 19h8.5a3.5 3.5 0 0 0 0-7h-9a3.5 3.5 0 0 1 0-7H16"></path></svg></a>
+<span style="width: 28px; height: 1px; margin: 6px 0; background: #E3E8EE"></span>
+<a href="UseCases.dc.html" aria-label="Use cases" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M4 21v-7"></path><path d="M4 10V3"></path><path d="M12 21v-9"></path><path d="M12 8V3"></path><path d="M20 21v-5"></path><path d="M20 12V3"></path><path d="M2 14h4"></path><path d="M10 8h4"></path><path d="M18 16h4"></path></svg></a>
+<a href="Cameras.dc.html" aria-label="Cameras and zones" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"></rect><path d="m16 10 6-3v10l-6-3z"></path></svg></a>
+<a href="AlertRouting.dc.html" aria-label="Alert routing" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="18" cy="5" r="3"></circle><circle cx="6" cy="12" r="3"></circle><circle cx="18" cy="19" r="3"></circle><path d="m8.6 13.5 6.8 4"></path><path d="m15.4 6.5-6.8 4"></path></svg></a>
+<a href="EdgeUnits.dc.html" aria-label="Edge units" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><rect x="5" y="5" width="14" height="14" rx="2"></rect><rect x="9" y="9" width="6" height="6"></rect><path d="M9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"></path></svg></a>
+<span style="width: 28px; height: 1px; margin: 6px 0; background: #E3E8EE"></span>
+<a href="Reports.dc.html" aria-label="Reports" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><path d="M14 3v6h6"></path><path d="M8 13h8M8 17h6"></path></svg></a>
+<a href="ModelPerformance.dc.html" aria-label="Model performance" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg></a>
+<span style="width: 28px; height: 1px; margin: 6px 0; background: #E3E8EE"></span>
+<a href="Users.dc.html" aria-label="Users and roles" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.9"></path><path d="M16 3.1a4 4 0 0 1 0 7.8"></path></svg></a>
+<a href="AuditLog.dc.html" aria-label="Audit log" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13"></path><path d="M3 6h.01M3 12h.01M3 18h.01"></path></svg></a>
+<a href="Integrations.dc.html" aria-label="Integrations" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22v-5"></path><path d="M9 8V2M15 8V2"></path><path d="M18 8v5a6 6 0 0 1-12 0V8z"></path></svg></a>
+<a href="Plan.dc.html" aria-label="Plan and usage" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 6px; color: #2B3846"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path><path d="M6 15h4"></path></svg></a>
+</nav>
+
+<aside aria-labelledby="tree-title" style="flex: 0 1 264px; min-width: 0; box-sizing: border-box; border-right: 1px solid #D9DFE7; background: #FFFFFF; display: flex; flex-direction: column">
+<div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 14px 10px; border-bottom: 1px solid #E3E8EE">
+<div style="display: flex; align-items: baseline; justify-content: space-between; gap: 8px"><h2 id="tree-title" style="margin: 0; font-size: 14px; font-weight: 600">Cameras</h2><span style="font-size: 12px; color: #5E6A78">30 on 3 convoys</span></div>
+<button type="button" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 10px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #5E6A78; font: inherit; font-size: 13px; text-align: left; cursor: pointer"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-4-4"></path></svg>Filter cameras</button>
+</div>
+<div role="tree" aria-label="Cameras by convoy and vessel" style="display: flex; flex-direction: column; padding: 8px 6px 12px; font-size: 13px">
+<button type="button" role="treeitem" aria-expanded="true" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 8px; border: 0; border-radius: 6px; background: transparent; color: #0E1A26; font: inherit; font-weight: 600; text-align: left; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg><span style="flex: 1 1 auto">GF Tuyutí convoy</span><span style="display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>4G</span></button>
+<span style="padding: 6px 8px 2px 30px; font-size: 12px; font-weight: 600; color: #5E6A78">GF Tuyutí · tug</span>
+<button type="button" role="treeitem" style="display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px 0 30px; border: 0; border-radius: 6px; background: transparent; color: #0E1A26; font: inherit; text-align: left; cursor: pointer"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span><span style="flex: 1 1 auto">Wheelhouse</span><span style="font-size: 12px; color: #5E6A78">live</span></button>
+<button type="button" role="treeitem" style="display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px 0 30px; border: 0; border-radius: 6px; background: transparent; color: #0E1A26; font: inherit; text-align: left; cursor: pointer"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span><span style="flex: 1 1 auto">Engine room</span><span style="font-size: 12px; color: #5E6A78">live</span></button>
+<button type="button" role="treeitem" style="display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px 0 30px; border: 0; border-radius: 6px; background: transparent; color: #0E1A26; font: inherit; text-align: left; cursor: pointer"><span style="width: 7px; height: 7px; border-radius: 50%; background: #FAB219"></span><span style="flex: 1 1 auto">Bow forward</span><span style="font-size: 12px; color: #7A4B00">blurred</span></button>
+<span style="padding: 6px 8px 2px 30px; font-size: 12px; font-weight: 600; color: #5E6A78">Guarán F 501</span>
+<button type="button" role="treeitem" style="display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px 0 30px; border: 0; border-radius: 6px; background: transparent; color: #0E1A26; font: inherit; text-align: left; cursor: pointer"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span><span style="flex: 1 1 auto">Deck forward</span><span style="font-size: 12px; color: #5E6A78">live</span></button>
+<button type="button" role="treeitem" style="display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px 0 30px; border: 0; border-radius: 6px; background: transparent; color: #0E1A26; font: inherit; text-align: left; cursor: pointer"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span><span style="flex: 1 1 auto">Port edge</span><span style="font-size: 12px; color: #5E6A78">snapshot</span></button>
+<button type="button" role="treeitem" style="display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px 0 30px; border: 0; border-radius: 6px; background: transparent; color: #0E1A26; font: inherit; text-align: left; cursor: pointer"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span><span style="flex: 1 1 auto">Reefer row 1</span><span style="font-size: 12px; color: #5E6A78">live</span></button>
+<span style="padding: 6px 8px 2px 30px; font-size: 12px; font-weight: 600; color: #5E6A78">Guarán F 503</span>
+<button type="button" role="treeitem" style="display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px 0 30px; border: 0; border-radius: 6px; background: transparent; color: #0E1A26; font: inherit; text-align: left; cursor: pointer"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span><span style="flex: 1 1 auto">Deck forward</span><span style="font-size: 12px; color: #5E6A78">live</span></button>
+<button type="button" role="treeitem" aria-selected="true" style="display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px 0 30px; border: 0; border-radius: 6px; background: #FDF1EC; color: #0E1A26; font: inherit; font-weight: 600; text-align: left; cursor: pointer"><span style="width: 7px; height: 7px; border-radius: 50%; background: #C2410C"></span><span style="flex: 1 1 auto">Port edge</span><span style="font-size: 12px; color: #9A330A">P2 alarm</span></button>
+<button type="button" role="treeitem" style="display: flex; align-items: center; gap: 8px; min-height: 36px; padding: 0 8px 0 30px; border: 0; border-radius: 6px; background: transparent; color: #0E1A26; font: inherit; text-align: left; cursor: pointer"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span><span style="flex: 1 1 auto">Reefer row 2</span><span style="font-size: 12px; color: #5E6A78">snapshot</span></button>
+<button type="button" role="treeitem" aria-expanded="false" style="display: flex; align-items: center; gap: 8px; min-height: 40px; margin-top: 6px; padding: 0 8px; border: 0; border-top: 1px solid #EEF1F4; border-radius: 0; background: transparent; color: #0E1A26; font: inherit; font-weight: 600; text-align: left; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg><span style="flex: 1 1 auto">GF Humaitá convoy</span><span style="display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: #475463"><span style="width: 7px; height: 7px; box-sizing: border-box; border-radius: 50%; border: 2px solid #8794A3"></span>No link</span></button>
+<button type="button" role="treeitem" aria-expanded="false" style="display: flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 8px; border: 0; border-top: 1px solid #EEF1F4; border-radius: 0; background: transparent; color: #0E1A26; font: inherit; font-weight: 600; text-align: left; cursor: pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m9 18 6-6-6-6"></path></svg><span style="flex: 1 1 auto">GF Boquerón convoy</span><span style="display: inline-flex; align-items: center; gap: 5px; font-size: 12px; font-weight: 500; color: #475463"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>4G</span></button>
+</div>
+</aside>
+
+<main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column">
+<div style="flex: 1 1 auto; box-sizing: border-box; padding: 16px 20px 20px; display: flex; flex-direction: column; gap: 14px">
+
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 20px">
+<div style="display: flex; flex-direction: column; gap: 4px">
+<nav aria-label="Breadcrumb" style="font-size: 12px; color: #5E6A78"><a href="Main.dc.html" style="text-decoration: none">Operations</a> / Video wall</nav>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px">
+<h1 style="margin: 0; font-size: 22px; line-height: 1.25; font-weight: 600">Video wall</h1>
+<button type="button" style="display: inline-flex; align-items: center; gap: 8px; min-height: 40px; padding: 0 12px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #0E1A26; font: inherit; font-size: 13px; cursor: pointer"><span style="color: #5E6A78">Layout</span><strong>GF Tuyutí convoy</strong><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg></button>
+</div>
+</div>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px">
+<div role="group" aria-label="Grid" style="display: flex; padding: 2px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF">
+<button type="button" aria-pressed="true" style="min-height: 40px; padding: 0 12px; border: 0; border-radius: 4px; background: #16324F; color: #FFFFFF; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Focus + 8</button>
+<button type="button" aria-pressed="false" style="min-height: 40px; padding: 0 12px; border: 0; border-radius: 4px; background: transparent; color: #2B3846; font: inherit; font-size: 13px; cursor: pointer">3 × 3</button>
+<button type="button" aria-pressed="false" style="min-height: 40px; padding: 0 12px; border: 0; border-radius: 4px; background: transparent; color: #2B3846; font: inherit; font-size: 13px; cursor: pointer">4 × 4</button>
+</div>
+<label style="display: inline-flex; align-items: center; gap: 8px; min-height: 44px; font-size: 13px; font-weight: 500; cursor: pointer"><input type="checkbox" checked="{{ overlays }}" onChange="{{ toggleOverlays }}" style="width: 18px; height: 18px; margin: 0; accent-color: #2E74B5">AI overlays</label>
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 250px">
+<div style="display: flex; justify-content: space-between; gap: 12px; font-size: 12px; color: #475463"><span><strong style="color: #0E1A26">Live budget</strong> · 20% of a 10 Mbps 4G link</span><span style="font-family: 'IBM Plex Mono', ui-monospace, monospace">1.3 / 2.0 Mbps</span></div>
+<div aria-hidden="true" style="height: 8px; border-radius: 4px; background: #D6E6F5; overflow: hidden"><div style="width: 65%; height: 100%; border-radius: 4px; background: #2E74B5"></div></div>
+<div style="font-size: 12px; color: #5E6A78">Focus in HD, 6 tiles in SD at 150 kbps, 2 on snapshot</div>
+</div>
+<button type="button" aria-label="Open on a second screen" style="display: flex; align-items: center; justify-content: center; width: 44px; height: 44px; border: 1px solid #C9D2DC; border-radius: 6px; background: #FFFFFF; color: #16324F; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="13" height="10" rx="1"></rect><path d="M8 18h3"></path><path d="M15 9h6v8h-9v-3"></path></svg></button>
+</div>
+</div>
+
+<div style="overflow-x: auto; border-radius: 8px">
+<div style="min-width: 860px; padding: 8px; box-sizing: border-box; border-radius: 8px; background: #0D151C; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px">
+
+<figure style="position: relative; grid-column: span 2; grid-row: span 2; margin: 0; min-height: 280px; border-radius: 6px; overflow: hidden; background: #000000; box-shadow: inset 0 0 0 2px #C2410C">
+<img src="/_blob/4135989e0279ea6c60ceabe240348f62" alt="Live view of the port edge on Guarán F 503 with a crew member close to the water" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<sc-if value="{{ overlays }}" hint-placeholder-val="{{ true }}">
+<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true" style="position: absolute; inset: 0; width: 100%; height: 100%"><polygon points="17.19,100 45.31,100 60.31,27.78 58.75,27.78" fill="#FF8A4C" fill-opacity="0.16" stroke="#FF8A4C" stroke-width="1.5" stroke-dasharray="6 4" vector-effect="non-scaling-stroke"></polygon></svg>
+<span style="position: absolute; left: 61%; top: 26%; display: inline-flex; align-items: center; height: 20px; padding: 0 6px; border-radius: 4px; border: 1px dashed #FF8A4C; background: rgba(6,11,16,0.7); color: #FFD9C7; font-size: 12px">Water edge zone</span>
+<div style="position: absolute; left: 43.4%; top: 50.5%; width: 7%; height: 24%; box-sizing: border-box; border: 2px solid #FF8A4C; border-radius: 2px"></div>
+<span style="position: absolute; left: 43.4%; top: calc(50.5% - 24px); display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: #FF8A4C; color: #1A0E08; font-size: 12px; font-weight: 600; white-space: nowrap">Person · no life jacket · 0.87</span>
+</sc-if>
+<span style="position: absolute; left: 10px; top: 10px; display: inline-flex; align-items: center; gap: 8px; height: 26px; padding: 0 9px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 13px; font-weight: 600">Guarán F 503 · Port edge<span style="font-weight: 400; color: #C9D6E3">pinned by alarm</span></span>
+<span style="position: absolute; right: 10px; top: 10px; display: inline-flex; align-items: center; gap: 6px; height: 26px; padding: 0 9px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px"><span style="width: 8px; height: 8px; border-radius: 50%; background: #0CA30C"></span>LIVE HD · 14:36:18</span>
+<div style="position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 12px; padding: 8px 10px 8px 12px; background: rgba(6,11,16,0.86); color: #FFFFFF">
+<span style="flex: none; display: inline-flex; align-items: center; height: 24px; padding: 0 8px; border-radius: 4px; background: #C2410C; font-size: 12px; font-weight: 600">P2 High</span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column"><span style="font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis">Life jacket missing near the water</span><span style="font-size: 12px; color: #C9D6E3; white-space: nowrap">14:32:06 · acknowledged on board</span></span>
+<a href="Review.dc.html" style="flex: none; display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; box-sizing: border-box; border-radius: 6px; background: #FFFFFF; color: #16324F; text-decoration: none; font-weight: 600">Open alarm</a>
+</div>
+</figure>
+
+<figure style="position: relative; margin: 0; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000000">
+<img src="/_blob/4b5bccf77559f13e8bb2859b14088d50" alt="Live view of the wheelhouse on GF Tuyutí, watchkeeper at the console" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<sc-if value="{{ overlays }}" hint-placeholder-val="{{ true }}">
+<div style="position: absolute; left: 81.5%; top: 43.5%; width: 12%; height: 38%; box-sizing: border-box; border: 2px solid #7CC4FF; border-radius: 2px"></div>
+<span style="position: absolute; right: 8px; top: calc(43.5% - 22px); display: inline-flex; align-items: center; height: 20px; padding: 0 6px; border-radius: 4px; background: #7CC4FF; color: #06121C; font-size: 12px; font-weight: 600; white-space: nowrap">Watchkeeper present</span>
+</sc-if>
+<span style="position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 6px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0CA30C"></span>LIVE SD</span>
+<figcaption style="position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px; font-weight: 500">Tug · Wheelhouse</figcaption>
+</figure>
+
+<figure style="position: relative; margin: 0; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000000">
+<img src="/_blob/5830a35916bc2b5c2cd09a8343d880a8" alt="Live view of the engine room on GF Tuyutí" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<span style="position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 6px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0CA30C"></span>LIVE SD</span>
+<figcaption style="position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px; font-weight: 500">Tug · Engine room</figcaption>
+</figure>
+
+<figure style="position: relative; margin: 0; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000000; box-shadow: inset 0 0 0 2px #FAB219">
+<img src="/_blob/33980c4320da43b57aff8e9790483119" alt="Live view from the bow forward camera, blurred by water on the lens" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: blur(3px) brightness(0.92)">
+<span style="position: absolute; left: 8px; top: 8px; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 7px; border-radius: 4px; background: #FEF4DC; color: #7A4B00; font-size: 12px; font-weight: 600">P3 · Blurred since 13:20</span>
+<span style="position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 6px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0CA30C"></span>LIVE SD</span>
+<figcaption style="position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px; font-weight: 500">Tug · Bow forward</figcaption>
+</figure>
+
+<figure style="position: relative; margin: 0; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000000">
+<img src="/_blob/1971ba98e33f71240a3ab76b97713222" alt="Live view of the deck forward on Guarán F 501" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<span style="position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 6px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0CA30C"></span>LIVE SD</span>
+<figcaption style="position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px; font-weight: 500">F 501 · Deck forward</figcaption>
+</figure>
+
+<figure style="position: relative; margin: 0; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000000">
+<img src="/_blob/f4d5873df19cc070c29e36fe1ab6c2f2" alt="Latest snapshot of the port edge on Guarán F 501" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(0.6) brightness(0.8)">
+<span style="position: absolute; left: 8px; top: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px">Held at snapshot to stay in budget</span>
+<span style="position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 6px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #B8C1CB"></span>SNAP 14:35</span>
+<figcaption style="position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px; font-weight: 500">F 501 · Port edge</figcaption>
+</figure>
+
+<figure style="position: relative; margin: 0; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000000">
+<img src="/_blob/4c736641b37e5d22b5ef0e566a24c4e0" alt="Live view of reefer row 1 on Guarán F 501, nobody in the walkway" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+<span style="position: absolute; left: 8px; top: 8px; display: inline-flex; align-items: center; gap: 5px; height: 22px; padding: 0 7px; border-radius: 4px; background: #FEF4DC; color: #7A4B00; font-size: 12px; font-weight: 600">P3 · 14:00 round not seen</span>
+<span style="position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 6px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0CA30C"></span>LIVE SD</span>
+<figcaption style="position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px; font-weight: 500">F 501 · Reefer row 1</figcaption>
+</figure>
+
+<figure style="position: relative; margin: 0; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000000">
+<img src="/_blob/1971ba98e33f71240a3ab76b97713222" alt="Live view of the deck forward on Guarán F 503" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1)">
+<span style="position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 6px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #0CA30C"></span>LIVE SD</span>
+<figcaption style="position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px; font-weight: 500">F 503 · Deck forward</figcaption>
+</figure>
+
+<figure style="position: relative; margin: 0; aspect-ratio: 16 / 9; border-radius: 6px; overflow: hidden; background: #000000">
+<img src="/_blob/4c736641b37e5d22b5ef0e566a24c4e0" alt="Latest snapshot of reefer row 2 on Guarán F 503" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scaleX(-1); filter: saturate(0.6) brightness(0.8)">
+<span style="position: absolute; left: 8px; top: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px">Held at snapshot to stay in budget</span>
+<span style="position: absolute; right: 8px; bottom: 8px; display: inline-flex; align-items: center; gap: 5px; height: 20px; padding: 0 6px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-family: 'IBM Plex Mono', ui-monospace, monospace; font-size: 12px"><span style="width: 6px; height: 6px; border-radius: 50%; background: #B8C1CB"></span>SNAP 14:34</span>
+<figcaption style="position: absolute; left: 8px; bottom: 8px; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: rgba(6,11,16,0.8); color: #FFFFFF; font-size: 12px; font-weight: 500">F 503 · Reefer row 2</figcaption>
+</figure>
+
+</div>
+</div>
+
+<section aria-labelledby="strip-title" style="border: 1px solid #D9DFE7; border-radius: 6px; background: #FFFFFF; overflow: hidden">
+<div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 0 8px 0 14px; border-bottom: 1px solid #E3E8EE">
+<div style="display: flex; align-items: baseline; gap: 8px"><h2 id="strip-title" style="margin: 0; font-size: 14px; font-weight: 600">Alarms on this layout</h2><span style="font-size: 12px; color: #5E6A78">3 open</span></div>
+<a href="Review.dc.html" style="display: inline-flex; align-items: center; min-height: 40px; padding: 0 10px; font-size: 13px; font-weight: 600; text-decoration: none">Alarm console</a>
+</div>
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr))">
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; background: #FDF6F3; border-right: 1px solid #E3E8EE">
+<span style="flex: none; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: #C2410C; color: #FFFFFF; font-size: 12px; font-weight: 600">P2</span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column"><span style="font-weight: 600">Life jacket missing near the water</span><span style="font-size: 12px; color: #475463">F 503 · Port edge · escalates in 1:31</span></span>
+<button type="button" style="flex: none; min-height: 40px; padding: 0 12px; border: 0; border-radius: 6px; background: #2E74B5; color: #FFFFFF; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer">Acknowledge</button>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px; border-right: 1px solid #E3E8EE">
+<span style="flex: none; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: #FEF4DC; color: #7A4B00; font-size: 12px; font-weight: 600">P3</span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column"><span style="font-weight: 600">14:00 reefer round not seen</span><span style="font-size: 12px; color: #475463">F 501 · Reefer row 1 · missed at 15:00</span></span>
+</div>
+<div style="display: flex; align-items: center; gap: 12px; padding: 12px 14px">
+<span style="flex: none; display: inline-flex; align-items: center; height: 22px; padding: 0 7px; border-radius: 4px; background: #FEF4DC; color: #7A4B00; font-size: 12px; font-weight: 600">P3</span>
+<span style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column"><span style="font-weight: 600">Camera image blurred</span><span style="font-size: 12px; color: #475463">Tug · Bow forward · duty officer</span></span>
+</div>
+</div>
+</section>
+</div>
+
+<footer style="display: flex; flex-wrap: wrap; align-items: center; gap: 6px 20px; min-height: 36px; padding: 6px 20px; box-sizing: border-box; border-top: 1px solid #D9DFE7; background: #FFFFFF; font-size: 12px; color: #475463">
+<span style="display: inline-flex; align-items: center; gap: 6px"><span style="width: 7px; height: 7px; border-radius: 50%; background: #0CA30C"></span>Streaming from 3 edge units</span>
+<span>Every live view is written to the audit log</span>
+<span style="margin-left: auto">Production · GFSA tenant · v2026.10.2</span>
+</footer>
+</main>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"overlays":{"editor":"boolean","default":true,"section":"Wall"},"$preview":{"width":1440,"height":840}}'>
+class Component extends DCLogic {
+renderVals() {
+const fromState = this.state && typeof this.state.overlays === 'boolean' ? this.state.overlays : null;
+const overlays = fromState !== null ? fromState : (this.props.overlays ?? true);
+return {
+overlays: overlays,
+toggleOverlays: () => this.setState({ overlays: !overlays })
+};
+}
+}
+</script>
+</body>
+</html>

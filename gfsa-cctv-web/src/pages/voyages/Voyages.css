@@ -1,0 +1,1074 @@
+/* Voyages list and voyage record (VOY-01 to VOY-06). Prefix: voy- */
+
+.voy-layout {
+  /* Timeline colours from the design canvas that have no global token. */
+  --voy-sched: #d5dfea;
+  --voy-missed: #d03b3b;
+  --voy-link-weak: #a9c8e8;
+  --voy-axis: #c3cad3;
+  --voy-p2-line: #e7b9a3;
+  --voy-p3-line: #f3dca4;
+  --voy-warn-row: #fffbf2;
+
+  flex: 1 1 auto;
+  display: flex;
+  align-items: stretch;
+  min-width: 0;
+}
+
+.voy-page {
+  min-width: 0;
+}
+.voy-page > .page-head {
+  align-items: flex-start;
+}
+
+.voy-strong {
+  font-weight: 600;
+}
+.voy-nowrap {
+  white-space: nowrap;
+}
+.voy-subtle {
+  color: var(--subtle);
+}
+.voy-sub-bad.sub {
+  color: var(--p2-text);
+  font-weight: 600;
+}
+.voy-note {
+  margin: 0;
+  font-size: 12px;
+  color: var(--subtle);
+}
+.voy-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+.voy-badges .badge {
+  height: 24px;
+  padding: 0 8px;
+  gap: 6px;
+}
+.voy-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ok-text);
+  font-weight: 600;
+}
+.voy-badge-missed {
+  background: var(--p1-tint);
+  color: var(--p1);
+}
+.table tr.voy-row-warn {
+  background: var(--voy-warn-row);
+}
+.voy-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+/* ---------- Priority bar in stats ---------- */
+
+.voy-prio-bar {
+  display: flex;
+  gap: 2px;
+  height: 6px;
+}
+.voy-prio-bar > span:first-child {
+  border-radius: 3px 0 0 3px;
+}
+.voy-prio-bar > span:last-child {
+  border-radius: 0 3px 3px 0;
+}
+.voy-prio-bar > span:only-child {
+  border-radius: 3px;
+}
+.voy-prio-bar__p1 {
+  background: var(--p1);
+}
+.voy-prio-bar__p2 {
+  background: var(--p2);
+}
+.voy-prio-bar__p3 {
+  background: var(--p3);
+}
+.voy-prio-bar__p4 {
+  background: var(--p4);
+}
+
+/* ---------- Toolbars, search, fields ---------- */
+
+.voy-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 10px 12px;
+}
+.voy-toolbar--inset {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.voy-toolbar__end {
+  margin-left: auto;
+}
+.voy-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 180px;
+}
+.voy-field > span {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.voy-search {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: var(--tap);
+  padding: 0 10px;
+  border: 1px solid var(--line-input);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--subtle);
+}
+.voy-search:focus-within {
+  outline: 2px solid var(--brand);
+  outline-offset: 1px;
+}
+.voy-search input {
+  flex: 1 1 auto;
+  min-width: 0;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+}
+.voy-search input:focus {
+  outline: none;
+}
+.voy-search input::placeholder {
+  color: var(--subtle);
+}
+.voy-search--wide {
+  flex: 1 1 260px;
+  max-width: 420px;
+}
+
+/* ---------- List page ---------- */
+
+.voy-list .meter {
+  max-width: 140px;
+  margin: 5px 0 3px;
+}
+.voy-list .sub .with-dot {
+  font-size: 12px;
+}
+
+/* ---------- Side list on the record ---------- */
+
+.voy-side {
+  flex: 0 0 272px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--line);
+  background: var(--surface);
+}
+.voy-side__head {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 14px 10px;
+  border-bottom: 1px solid var(--line-soft);
+}
+.voy-side__head h2 {
+  font-size: 14px;
+  font-weight: 600;
+}
+.voy-side__head > div > span {
+  font-size: 12px;
+  color: var(--subtle);
+}
+.voy-side__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 4px 6px 12px;
+  font-size: 13px;
+}
+.voy-side__group {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.voy-side__group-label {
+  padding: 12px 10px 4px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+.voy-side__item {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-height: var(--tap);
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  color: var(--ink);
+  text-decoration: none;
+}
+.voy-side__item:hover {
+  background: var(--surface-2);
+  color: var(--ink);
+}
+.voy-side__item[aria-current='page'] {
+  background: var(--brand-tint);
+  box-shadow: inset 3px 0 0 var(--brand);
+}
+.voy-side__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+.voy-side__badge {
+  height: 20px;
+  padding: 0 6px;
+}
+.voy-side__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.voy-side__meta .dot {
+  width: 7px;
+  height: 7px;
+}
+
+/* ---------- Overview cards ---------- */
+
+.card__head.voy-card-head-wrap {
+  flex-wrap: wrap;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+.voy-aside {
+  flex: 1 1 340px;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.voy-aside-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 4px 14px 12px;
+}
+.voy-mini {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.voy-mini th {
+  padding: 8px;
+  border-bottom: 1px solid var(--line-soft);
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+}
+.voy-mini td {
+  padding: 9px 8px;
+  border-bottom: 1px solid var(--line-row);
+  vertical-align: top;
+}
+.voy-mini tbody tr:last-child td {
+  border-bottom: 0;
+}
+.voy-mini th:first-child,
+.voy-mini td:first-child {
+  padding-left: 0;
+}
+.voy-mini th:last-child,
+.voy-mini td:last-child {
+  padding-right: 0;
+}
+.voy-mini .right {
+  text-align: right;
+}
+.voy-mini .sub {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.voy-mini .voy-badges .badge {
+  height: 22px;
+}
+
+.voy-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--tap);
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  background: var(--surface);
+  color: var(--link);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+.voy-card-foot:hover {
+  background: var(--surface-2);
+  color: var(--link-hover);
+}
+
+/* ---------- Connect sync ---------- */
+
+.card__head.voy-sync-head {
+  padding-right: 14px;
+}
+.voy-sync-time {
+  font-size: 12px;
+  color: var(--muted);
+}
+.voy-sync {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.voy-eyebrow {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+.voy-dl {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 6px 12px;
+  margin: 0;
+}
+.voy-dl dt {
+  color: var(--muted);
+}
+.voy-dl dd {
+  margin: 0;
+  text-align: right;
+}
+.voy-dl--strong dd {
+  font-weight: 600;
+}
+.voy-report {
+  padding-top: 12px;
+  border-top: 1px solid var(--line-row);
+}
+.voy-report p {
+  margin-bottom: 8px;
+  color: var(--muted);
+}
+
+/* ---------- Timeline (VOY-02) ---------- */
+
+.card__head.voy-tl__head {
+  flex-wrap: wrap;
+  gap: 6px 16px;
+  padding: 6px 8px 6px 14px;
+}
+.voy-tl__body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 14px 14px 12px;
+}
+.voy-tl__scroll {
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+.voy-tl__scroll:focus-visible {
+  outline-offset: 4px;
+}
+.voy-tl__grid {
+  min-width: 960px;
+  display: grid;
+  grid-template-columns: 150px minmax(0, 1fr);
+  column-gap: 16px;
+  row-gap: 12px;
+  align-items: center;
+}
+.voy-tl__lines {
+  grid-column: 2;
+  align-self: stretch;
+  position: relative;
+  pointer-events: none;
+}
+.voy-tl__lines > span {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: var(--line-soft);
+}
+.voy-tl__label {
+  grid-column: 1;
+  font-size: 13px;
+  color: var(--muted);
+}
+.voy-tl__track {
+  grid-column: 2;
+  position: relative;
+  align-self: stretch;
+}
+.voy-tl__axis {
+  font-size: 12px;
+  color: var(--subtle);
+}
+.voy-tl__axis > span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  white-space: nowrap;
+}
+.voy-tl__axis > span.is-strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* Interactive marks share a reset. */
+.voy-tl__seg,
+.voy-tl__hit,
+.voy-tl__bar,
+.voy-tl__group,
+.voy-tl__link {
+  position: absolute;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.voy-tl__seg {
+  top: 0;
+  height: 22px;
+  margin-left: 1px;
+  padding-left: 8px;
+  border-radius: 4px;
+  color: var(--navy);
+  font-size: 12px;
+  line-height: 22px;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.voy-tl__seg--port {
+  background: var(--navy);
+}
+.voy-tl__seg--underway {
+  background: var(--voy-sched);
+}
+.voy-tl__seg:hover,
+.voy-tl__seg[aria-pressed='true'] {
+  box-shadow: inset 0 0 0 2px var(--brand);
+}
+
+.voy-tl__hit {
+  top: 50%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 32px;
+  border-radius: 4px;
+  transform: translate(-50%, -50%);
+}
+.voy-tl__hit:hover,
+.voy-tl__hit[aria-pressed='true'] {
+  background: rgba(46, 116, 181, 0.14);
+}
+.voy-tl__hit--tri {
+  height: 28px;
+}
+
+.voy-mark {
+  display: inline-block;
+  flex: none;
+  box-sizing: border-box;
+  border-radius: 50%;
+}
+.voy-mark--on_time {
+  width: 10px;
+  height: 10px;
+  background: var(--ok);
+  box-shadow: 0 0 0 2px #fff;
+}
+.voy-mark--overdue {
+  width: 14px;
+  height: 14px;
+  background: #fff;
+  border: 3px solid var(--warn);
+}
+.voy-mark--due {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border: 2px solid var(--p4);
+}
+.voy-mark--queued {
+  width: 10px;
+  height: 10px;
+  background: #fff;
+  border: 2px dashed var(--offline);
+}
+
+.voy-tl__call-label {
+  position: absolute;
+  top: 3px;
+  font-size: 12px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.voy-tl__call-label--right {
+  transform: translateX(12px);
+}
+.voy-tl__call-label--left {
+  transform: translateX(calc(-100% - 12px));
+}
+.voy-tl__call-label.is-pending {
+  color: var(--muted);
+}
+
+.voy-tl__baseline {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--voy-axis);
+}
+.voy-tl__bar {
+  bottom: 1px;
+  height: 39px;
+  display: flex;
+  align-items: flex-end;
+  transform: translateX(-50%);
+}
+.voy-tl__bar > span {
+  display: block;
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  background: var(--chart);
+}
+.voy-tl__bar:hover > span,
+.voy-tl__bar[aria-pressed='true'] > span {
+  background: var(--navy);
+}
+.voy-tl__max {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 12px;
+  color: var(--subtle);
+  pointer-events: none;
+}
+
+.voy-tl__group {
+  top: 0;
+  height: 24px;
+  min-width: 8px;
+}
+.voy-tl__group > span {
+  position: absolute;
+  top: 7px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  border-radius: 3px;
+}
+.voy-tl__group--p1 > span {
+  background: var(--p1);
+}
+.voy-tl__group--p2 > span {
+  background: var(--p2);
+}
+.voy-tl__group--p3 > span {
+  background: var(--p3);
+}
+.voy-tl__group--p4 > span {
+  background: var(--p4);
+}
+.voy-tl__group:hover > span,
+.voy-tl__group[aria-pressed='true'] > span {
+  box-shadow: 0 0 0 2px var(--navy);
+}
+.voy-tl__group-link {
+  position: absolute;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid var(--voy-p2-line);
+  border-radius: 4px;
+  background: var(--p2-tint);
+  color: var(--p2-text);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.voy-tl__group-link:hover {
+  color: var(--p2-text);
+  text-decoration: underline;
+}
+.voy-tl__group-link--p3 {
+  border-color: var(--voy-p3-line);
+  background: var(--p3-tint);
+  color: var(--p3-text);
+}
+.voy-tl__group-link--p3:hover {
+  color: var(--p3-text);
+}
+
+.voy-tri--p1 {
+  fill: var(--p1);
+  stroke: var(--p1);
+}
+.voy-tri--p2 {
+  fill: var(--p2);
+  stroke: var(--p2-text);
+}
+.voy-tri--p3 {
+  fill: var(--p3);
+  stroke: var(--p3-text);
+}
+.voy-tri--p4 {
+  fill: var(--p4);
+  stroke: var(--p4-text);
+}
+
+.voy-tl__link {
+  top: -8px;
+  height: 26px;
+  margin-left: 1px;
+}
+.voy-tl__link > span {
+  position: absolute;
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 10px;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+.voy-tl__link--strong > span {
+  background: var(--brand);
+}
+.voy-tl__link--weak > span {
+  background: var(--voy-link-weak);
+  border: 1px solid var(--brand);
+}
+.voy-tl__link--none > span {
+  border: 1px dashed var(--offline);
+}
+.voy-tl__link:hover > span,
+.voy-tl__link[aria-pressed='true'] > span {
+  box-shadow: 0 0 0 2px var(--navy);
+}
+
+.voy-tl__now-line {
+  grid-column: 2;
+  align-self: stretch;
+  position: relative;
+  z-index: 2;
+  pointer-events: none;
+}
+.voy-tl__now-line > span {
+  position: absolute;
+  top: -6px;
+  bottom: -6px;
+  width: 2px;
+  margin-left: -1px;
+  background: var(--navy);
+}
+.voy-tl__now {
+  position: absolute;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding: 0 8px;
+  border-radius: 4px;
+  background: var(--navy);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transform: translateX(-50%);
+}
+
+.voy-tl__detail {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 12px;
+  min-height: var(--tap);
+  padding: 6px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: var(--radius);
+  background: var(--surface-3);
+  font-size: 13px;
+}
+.voy-tl__detail > span {
+  color: var(--ink-2);
+}
+.voy-tl__detail .voy-tl__detail-hint {
+  color: var(--subtle);
+}
+.voy-tl__detail-link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  font-weight: 600;
+}
+
+.voy-legend {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-row);
+  font-size: 12px;
+  color: var(--muted);
+}
+.voy-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.voy-legend__bar {
+  width: 8px;
+  height: 12px;
+  border-radius: 2px 2px 0 0;
+  background: var(--chart);
+}
+.voy-legend__group {
+  width: 12px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--p2);
+}
+.voy-legend__link {
+  width: 14px;
+  height: 8px;
+  box-sizing: border-box;
+  border-radius: 2px;
+}
+.voy-legend__link--strong {
+  background: var(--brand);
+}
+.voy-legend__link--weak {
+  background: var(--voy-link-weak);
+  border: 1px solid var(--brand);
+}
+.voy-legend__link--none {
+  border: 1px dashed var(--offline);
+}
+
+@media (max-width: 1100px) {
+  .voy-side {
+    display: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .voy-head-actions {
+    width: 100%;
+  }
+  .voy-head-actions > * {
+    flex: 1 1 auto;
+  }
+  .voy-toolbar > .segmented {
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  .voy-field {
+    flex: 1 1 100%;
+  }
+  .voy-toolbar__end {
+    margin-left: 0;
+  }
+}
+
+/* ---------- Events that arrived late (store and forward) ---------- */
+
+.voy-tl__bar--late > span,
+.voy-legend__bar--late {
+  background: repeating-linear-gradient(135deg, var(--chart) 0 3px, var(--voy-link-weak) 3px 6px);
+}
+.voy-tl__bar--late:hover > span,
+.voy-tl__bar--late[aria-pressed='true'] > span {
+  background: var(--navy);
+}
+
+/* ---------- "In Connect" drawer ---------- */
+
+.voy-drawer-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 55;
+  background: rgba(14, 26, 38, 0.35);
+  display: flex;
+  justify-content: flex-end;
+}
+.voy-drawer {
+  width: min(520px, 100vw);
+  height: 100%;
+  overflow: auto;
+  background: var(--surface);
+  box-shadow: var(--shadow-pop);
+  padding: 0 20px 24px;
+  outline: none;
+}
+.voy-drawer__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 0 12px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line-soft);
+}
+.voy-drawer__head h2 {
+  font-size: 18px;
+}
+.voy-drawer__head > div > span {
+  display: block;
+  margin-top: 2px;
+  font-size: 13px;
+  color: var(--muted);
+}
+.voy-drawer__sec {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line-soft);
+}
+.voy-drawer__sec h3 {
+  font-size: 14px;
+}
+.voy-drawer__sec .sub {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.voy-drawer__sync {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 12px;
+}
+.voy-drawer__sync > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.voy-drawer__sync .voy-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 2px;
+}
+.voy-drawer__sync strong {
+  font-size: 16px;
+}
+.voy-drawer__sync > div > span:not(.voy-eyebrow) {
+  color: var(--muted);
+}
+.voy-drawer__pending {
+  margin-top: 4px;
+  color: var(--ink-2) !important;
+  font-weight: 600;
+}
+.voy-drawer__list,
+.voy-drawer__sched,
+.voy-drawer__out,
+.voy-drawer__boxes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.voy-drawer__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+.voy-drawer__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.voy-drawer__list li > svg {
+  flex: none;
+  margin-top: 2px;
+  color: var(--muted);
+}
+.voy-drawer__sched {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+}
+.voy-drawer__sched li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 4px 6px;
+  border-radius: 4px;
+}
+.voy-drawer__sched li.is-now {
+  background: var(--surface-2);
+  font-weight: 600;
+}
+.voy-drawer__swatch {
+  flex: none;
+  width: 12px;
+  height: 12px;
+  margin-top: 3px;
+  border-radius: 3px;
+}
+.voy-drawer__swatch--underway {
+  background: var(--voy-sched);
+}
+.voy-drawer__swatch--port {
+  background: var(--surface);
+  border: 1px solid var(--voy-axis);
+}
+.voy-drawer__cargo {
+  border: 1px solid var(--line-soft);
+  border-radius: 6px;
+  font-size: 13px;
+}
+.voy-drawer__cargo > summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  min-height: var(--tap);
+  padding: 6px 12px;
+  cursor: pointer;
+}
+.voy-drawer__cargo > .voy-note,
+.voy-drawer__cargo > .voy-drawer__boxes {
+  margin: 0 12px 10px;
+}
+.voy-drawer__boxes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 4px 10px;
+  max-height: 240px;
+  overflow: auto;
+  font-size: 12px;
+}
+.voy-drawer__boxes li {
+  padding: 2px 0;
+}
+.voy-drawer__boxes li.is-diff {
+  color: var(--p2-text);
+  font-weight: 600;
+}
+.voy-drawer__out {
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+}
+.voy-drawer__out li {
+  display: grid;
+  grid-template-columns: 96px minmax(0, 1fr);
+  gap: 10px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line-row);
+}
+.voy-drawer__out li:last-child {
+  border-bottom: 0;
+}
+.voy-drawer__out-time {
+  color: var(--muted);
+  white-space: nowrap;
+}
+.voy-drawer__out-kind {
+  font-weight: 600;
+}
+.voy-drawer__state {
+  color: var(--ok-text);
+  font-weight: 600;
+}
+.voy-drawer__state--wait {
+  color: var(--ink-2);
+}
+.voy-drawer__foot {
+  padding-top: 16px;
+}
+.voy-drawer .segmented {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+@media (max-width: 480px) {
+  .voy-drawer {
+    padding: 0 16px 24px;
+  }
+  .voy-drawer__out li {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2px;
+  }
+}
+
+/* ---------- Small helpers ---------- */
+
+.voy-late {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+}
+.voy-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}

@@ -1,0 +1,312 @@
+/* Audit log (ADM-03). Prefix audl-. */
+
+.audl-chain-foot {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+/* ---------- Filter bar ---------- */
+
+.audl-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  overflow: visible;
+}
+.audl-search {
+  position: relative;
+  flex: 1 1 260px;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+.audl-search > svg {
+  position: absolute;
+  left: 11px;
+  color: var(--subtle);
+  pointer-events: none;
+}
+.audl-search .input {
+  padding-left: 34px;
+  font-size: 13px;
+}
+.audl-select {
+  width: auto;
+  flex: 0 1 auto;
+  min-width: 0;
+  max-width: 100%;
+  padding: 0 8px;
+  font-size: 13px;
+}
+.audl-clear {
+  color: var(--link);
+  font-size: 13px;
+  padding: 0 10px;
+}
+.audl-clear:hover {
+  color: var(--link-hover);
+}
+
+/* ---------- Entries ---------- */
+
+.audl-entries {
+  flex: 999 1 640px;
+}
+.audl-table {
+  min-width: 860px;
+  table-layout: fixed;
+  text-wrap: pretty;
+}
+.audl-table td {
+  overflow-wrap: anywhere;
+}
+.audl-time {
+  white-space: nowrap;
+}
+.audl-table td.audl-time {
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 6px;
+}
+.audl-time-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: var(--tap);
+  padding: 0 6px 0 4px;
+  border: 0;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  color: var(--ink);
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.audl-time-btn:hover {
+  background: var(--neutral-tint);
+}
+.audl-time-btn > svg {
+  color: var(--subtle);
+}
+.audl-row.is-sel {
+  background: var(--brand-tint-2);
+}
+.audl-row.is-sel td:first-child {
+  box-shadow: inset 3px 0 0 var(--brand);
+}
+.audl-nowrap {
+  white-space: nowrap;
+}
+.audl-table td.audl-nowrap {
+  overflow-wrap: normal;
+}
+.audl-actor {
+  display: block;
+  font-weight: 600;
+}
+.audl-source {
+  font-size: 12px;
+  color: var(--muted);
+}
+.audl-muted {
+  color: var(--muted);
+}
+.audl-ok {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  color: var(--ok-text);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.audl-bad {
+  color: var(--p2-text);
+  font-weight: 600;
+}
+
+.audl-exp td {
+  background: var(--surface-3);
+  padding-top: 8px;
+  padding-bottom: 12px;
+}
+.audl-exp__dl {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  gap: 6px 16px;
+  margin: 0;
+  padding-left: 22px;
+  font-size: 12px;
+}
+.audl-exp__dl dt {
+  color: var(--muted);
+}
+.audl-exp__dl dd {
+  margin: 0;
+}
+.audl-hash {
+  word-break: break-all;
+}
+
+.audl-pager {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12px;
+  color: var(--muted);
+}
+.audl-pager__nav {
+  display: flex;
+  gap: 8px;
+}
+.audl-pager__nav .btn {
+  min-height: var(--tap);
+}
+
+/* ---------- Selected entry ---------- */
+
+.audl-side {
+  position: sticky;
+  top: 16px;
+  flex: 1 1 320px;
+}
+.audl-side__body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 14px 16px;
+}
+.audl-dl {
+  display: grid;
+  grid-template-columns: minmax(0, 110px) minmax(0, 1fr);
+  gap: 8px 12px;
+  margin: 0;
+  font-size: 13px;
+}
+.audl-dl dt {
+  color: var(--muted);
+}
+.audl-dl dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+.audl-dd-sub {
+  display: block;
+  font-size: 12px;
+  color: var(--muted);
+}
+.audl-check {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.audl-eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--subtle);
+}
+.audl-chain {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  font-size: 13px;
+}
+.audl-chain > svg,
+.audl-chain > .akit-spinner {
+  flex: none;
+  margin-top: 1px;
+}
+.audl-chain--ok {
+  border-color: #b9dfb9;
+  background: var(--ok-tint);
+  color: var(--ok-text);
+}
+.audl-chain--bad {
+  border-color: #f2c9b6;
+  background: var(--p2-tint);
+  color: var(--p2-text);
+}
+.audl-full {
+  width: 100%;
+}
+.audl-note {
+  font-size: 12px;
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .audl-select {
+    flex: 1 1 140px;
+  }
+  .audl-side {
+    position: static;
+  }
+}
+
+/* ---------- Tamper demo ---------- */
+
+.audl-tamper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--surface-2);
+  font-size: 13px;
+}
+.audl-tamper q {
+  font-weight: 600;
+}
+.audl-tamper__steps {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.audl-tamper__steps li {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-left: 10px;
+  border-left: 3px solid var(--line);
+}
+.audl-tamper__steps li.is-bad {
+  border-left-color: var(--p2-text);
+  color: var(--p2-text);
+}
+.audl-tamper__label {
+  font-weight: 600;
+}
+.audl-tamper__hash {
+  font-size: 12px;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.audl-linkbtn {
+  min-height: var(--tap);
+  padding: 0 2px;
+  border: 0;
+  background: transparent;
+  color: var(--link);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+.audl-linkbtn:hover {
+  color: var(--link-hover);
+}

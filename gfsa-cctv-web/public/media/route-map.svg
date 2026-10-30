@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 900" width="440" height="900">
+<rect width="440" height="900" fill="#F2F4F1"></rect>
+<g stroke="#E1E6EA" stroke-width="1">
+<line x1="0" y1="101.9" x2="440" y2="101.9"></line>
+<line x1="0" y1="271.7" x2="440" y2="271.7"></line>
+<line x1="0" y1="441.5" x2="440" y2="441.5"></line>
+<line x1="0" y1="611.3" x2="440" y2="611.3"></line>
+<line x1="0" y1="781.1" x2="440" y2="781.1"></line>
+<line x1="102.7" y1="0" x2="102.7" y2="900"></line>
+<line x1="249.3" y1="0" x2="249.3" y2="900"></line>
+<line x1="396" y1="0" x2="396" y2="900"></line>
+</g>
+<g font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" font-size="12" fill="#8C97A3">
+<text x="6" y="97">26°S</text>
+<text x="6" y="267">28°S</text>
+<text x="6" y="437">30°S</text>
+<text x="6" y="607">32°S</text>
+<text x="6" y="777">34°S</text>
+</g>
+<polygon points="218.5,770.9 240,795 261.1,821 300,840 345,852 384.3,857.5 425.3,862.6 440,861.7 440,900 300.7,900 297,891.5 256.7,854.1 222.2,832 206.8,816.7 209,793.8" fill="#CFE0EE"></polygon>
+<g fill="none" stroke="#B9D1E6" stroke-linecap="round" stroke-linejoin="round">
+<polyline stroke-width="3" points="205.3,211.4 250,222 298.5,223.3 345.4,236.9 405.5,214.8 440,203.8"></polyline>
+<polyline stroke-width="3" points="440,272 393.1,318.4 355,370 316.1,416.9 275.7,462.7 252.3,558.6 243.5,638.4 226.6,706.4 218.5,770.9"></polyline>
+<polyline stroke-width="5" points="286,0 276.5,40.8 281.6,60.3 260.3,89.1 239.8,117.2 234.7,144.3 227.3,174.9 212.7,191.9 205.3,211.4 188.5,226.7 190.7,267.4 172.3,315 156.2,368.5 137.1,443.2 129.1,504.3 104.1,545.9 64.5,588.4 55.7,617.2 55.7,691.9 78.5,715.7 86.5,724.2 127.6,753.9 173.8,789.6 206.8,816.7"></polyline>
+</g>
+<g fill="none" stroke="#2E74B5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="1 0">
+<polyline points="276.5,40.8 281.6,60.3 260.3,89.1 239.8,117.2 234.7,144.3 227.3,174.9 212.7,191.9 205.3,211.4 188.5,226.7 190.7,267.4 172.3,315 156.2,368.5 137.1,443.2 129.1,504.3 104.1,545.9 64.5,588.4 55.7,617.2 55.7,691.9 78.5,715.7 86.5,724.2 127.6,753.9 173.8,789.6 206.8,816.7 222.2,832 270,842 330,851 384.3,857.5"></polyline>
+</g>
+<g font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="3" fill="#A3ADB8">
+<text x="290" y="140">PARAGUAY</text>
+<text x="14" y="300">ARGENTINA</text>
+<text x="330" y="690">URUGUAY</text>
+<text x="352" y="402">BRASIL</text>
+</g>
+<g font-family="IBM Plex Sans, Segoe UI, Arial, sans-serif" font-size="12" font-style="italic" fill="#6F91AE">
+<text x="246" y="166">Río Paraguay</text>
+<text x="152" y="476">Río Paraná</text>
+<text x="258" y="602">Río Uruguay</text>
+<text x="300" y="884">Río de la Plata</text>
+</g>
+</svg>

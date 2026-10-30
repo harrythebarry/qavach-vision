@@ -1,0 +1,494 @@
+/* Daily summary (REP-01): toolbar plus the A4 paper page. Prefix ds-. */
+
+.ds-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: 12px 16px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+}
+.ds-toolbar__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--muted);
+}
+.ds-toolbar__field .select {
+  min-width: 220px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.ds-date {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.ds-date .input {
+  width: auto;
+  font-size: 14px;
+}
+.ds-toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-left: auto;
+}
+.ds-note {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: -6px;
+  font-size: 12px;
+  color: var(--subtle);
+}
+
+/* ---------- Stage ---------- */
+
+.ds-stage {
+  display: flex;
+  justify-content: center;
+  padding: 8px 0 24px;
+}
+.ds-stage__box {
+  position: relative;
+  flex: none;
+}
+.ds-stage__inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+}
+
+/* ---------- Paper (794 × 1123 = A4 at 96 dpi) ---------- */
+
+.ds-paper {
+  --ds-accepted: var(--chart);
+  --ds-false: #eb6834;
+  --ds-rejected: #1baf7a;
+  --ds-pending: var(--p4);
+  --ds-rule: #8794a3;
+  --ds-ink-2: var(--neutral-text);
+
+  position: relative;
+  width: 794px;
+  height: 1123px;
+  overflow: hidden;
+  padding: 56px 64px 44px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 16px;
+  line-height: 1.45;
+  box-shadow: 0 2px 10px rgba(14, 26, 38, 0.16);
+  font-variant-numeric: tabular-nums;
+}
+.ds-paper h2,
+.ds-paper h3 {
+  margin: 0;
+}
+
+.ds-paper__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--navy);
+}
+.ds-paper__title {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  color: var(--ds-ink-2);
+}
+.ds-paper__title h2 {
+  font-size: 34px;
+  line-height: 1.15;
+  font-weight: 600;
+  color: var(--ink);
+}
+.ds-kicker {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+.ds-paper__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  text-align: right;
+  font-size: 14px;
+  color: var(--ds-ink-2);
+}
+
+.ds-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+.ds-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--line-input);
+  border-radius: 8px;
+}
+.ds-kpi > span {
+  font-size: 13px;
+  color: var(--ds-ink-2);
+}
+.ds-kpi > strong {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.15;
+}
+.ds-kpi__na small {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--ds-ink-2);
+}
+
+.ds-sec {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.ds-sec--tight {
+  gap: 8px;
+}
+.ds-sec h3 {
+  font-size: 18px;
+  font-weight: 600;
+}
+.ds-sec__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 16px;
+}
+.ds-sec__head > span {
+  font-size: 14px;
+  color: var(--ds-ink-2);
+}
+.ds-muted {
+  color: var(--ds-ink-2);
+}
+.ds-small {
+  font-size: 14px;
+}
+.ds-xsmall {
+  font-size: 13px;
+}
+
+.ds-bars {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  align-items: center;
+  gap: 10px 16px;
+}
+.ds-bars__row {
+  display: contents;
+}
+.ds-bars__note {
+  display: block;
+  font-size: 13px;
+  color: var(--muted);
+}
+.ds-bars__bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-left: 1px solid var(--ds-rule);
+}
+.ds-bars__bar > span {
+  height: 16px;
+  border-radius: 0 4px 4px 0;
+  background: var(--chart);
+}
+
+.ds-stack {
+  display: flex;
+  gap: 2px;
+  height: 20px;
+}
+.ds-stack > span:first-child {
+  border-radius: 4px 0 0 4px;
+}
+.ds-stack > span:last-child {
+  border-radius: 0 4px 4px 0;
+}
+.ds-stack > span:only-child {
+  border-radius: 4px;
+}
+.ds-stack__accepted {
+  background: var(--ds-accepted);
+}
+.ds-stack__false {
+  background: var(--ds-false);
+}
+.ds-stack__rejected {
+  background: var(--ds-rejected);
+}
+.ds-stack__pending {
+  background: var(--ds-pending);
+}
+
+.ds-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font-size: 15px;
+}
+.ds-legend > span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.ds-sw {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+}
+.ds-sw--wide {
+  width: 16px;
+  height: 8px;
+}
+
+.ds-two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+
+.ds-rounds {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.ds-rounds th {
+  padding: 4px 0;
+  border-bottom: 1px solid var(--ds-rule);
+  text-align: left;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ds-ink-2);
+}
+.ds-rounds td {
+  padding: 7px 0;
+  border-bottom: 1px solid #dce1e7;
+}
+.ds-rounds th:nth-child(2),
+.ds-rounds td:nth-child(2) {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+.ds-rounds tbody tr:last-child td {
+  border-bottom: 0;
+}
+.ds-res {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: 600;
+}
+.ds-res--ok {
+  color: var(--ok-text);
+}
+.ds-res--missed {
+  color: var(--p1);
+}
+.ds-res--late {
+  color: var(--warn-text);
+}
+.ds-res--upcoming {
+  color: var(--ds-ink-2);
+  font-weight: 500;
+}
+.ds-sofar {
+  font-weight: 600;
+  color: var(--warn-text);
+}
+.ds-today {
+  max-width: 794px;
+  margin-bottom: 12px;
+}
+
+.ds-uptime {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 4px;
+  font-size: 15px;
+}
+.ds-uptime > div {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ds-uptime__label {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+.ds-uptime__track {
+  display: flex;
+  height: 8px;
+  border-radius: 4px;
+  background: var(--brand-tint-line);
+  overflow: hidden;
+}
+.ds-uptime__track > span {
+  background: var(--brand);
+}
+
+.ds-link {
+  position: relative;
+  height: 14px;
+}
+.ds-link > span {
+  position: absolute;
+  top: 0;
+  height: 14px;
+  border-radius: 3px;
+}
+.ds-link__good {
+  background: var(--ok);
+}
+.ds-link__weak {
+  background: var(--warn);
+}
+.ds-link__none {
+  background: var(--p4);
+}
+.ds-link__rest {
+  background: repeating-linear-gradient(135deg, var(--line-soft) 0 4px, transparent 4px 8px);
+  border: 1px dashed var(--line-input);
+}
+.ds-link > .ds-link__now {
+  top: -4px;
+  width: 2px;
+  height: 22px;
+  border-radius: 1px;
+  background: var(--ink);
+}
+.ds-axis {
+  position: relative;
+  height: 18px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--ds-ink-2);
+}
+.ds-axis > span {
+  position: absolute;
+}
+
+.ds-paper__foot {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line-input);
+  font-size: 12px;
+  color: var(--ds-ink-2);
+}
+.ds-paper__foot > span:last-child {
+  flex: none;
+}
+
+/* Watermark: only on printed copies (downloads are stamped server-side). */
+.ds-watermark {
+  display: none;
+}
+
+@media (max-width: 720px) {
+  .ds-toolbar__field .select {
+    min-width: 0;
+    width: 100%;
+  }
+  .ds-toolbar__field:first-child {
+    flex: 1 1 100%;
+  }
+  .ds-toolbar__actions {
+    margin-left: 0;
+    width: 100%;
+  }
+  .ds-toolbar__actions .btn {
+    flex: 1 1 0;
+  }
+}
+
+/* ---------- Print: only the paper ---------- */
+
+@media print {
+  @page {
+    size: A4;
+    margin: 0;
+  }
+  body:has(.ds-paper) {
+    background: #fff;
+  }
+  body:has(.ds-paper) .shell__header,
+  body:has(.ds-paper) .shell__rail,
+  body:has(.ds-paper) .shell__footer,
+  body:has(.ds-paper) .toast-stack,
+  .ds-page > .page-head,
+  .ds-toolbar,
+  .ds-note {
+    display: none !important;
+  }
+  body:has(.ds-paper) * {
+    visibility: hidden;
+  }
+  .ds-paper,
+  .ds-paper * {
+    visibility: visible;
+  }
+  .ds-page {
+    padding: 0;
+  }
+  .ds-stage,
+  .ds-stage__box,
+  .ds-stage__inner {
+    position: static;
+    padding: 0;
+    width: auto !important;
+    height: auto !important;
+    transform: none !important;
+  }
+  .ds-paper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    box-shadow: none;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .ds-watermark {
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-30deg);
+    white-space: nowrap;
+    font-size: 22px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(22, 50, 79, 0.12);
+    pointer-events: none;
+  }
+}

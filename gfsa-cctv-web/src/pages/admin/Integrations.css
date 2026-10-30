@@ -1,0 +1,271 @@
+/* Integrations (ADM-04). Prefix intg-. */
+
+.intg-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+  gap: 16px;
+}
+
+.intg-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  box-shadow: var(--shadow-card);
+  min-width: 0;
+}
+.intg-card.is-off {
+  background: var(--surface-3);
+}
+.intg-card__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.intg-card__head h2 {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 600;
+}
+.intg-card__icon {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius);
+  background: var(--brand-tint);
+  color: var(--navy);
+}
+.intg-card.is-off .intg-card__icon {
+  background: var(--neutral-tint);
+  color: var(--muted);
+}
+.intg-badge {
+  flex: none;
+  gap: 5px;
+  padding: 0 8px;
+}
+.intg-card__desc {
+  font-size: 13px;
+  color: var(--muted);
+  text-wrap: balance;
+}
+.intg-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.intg-card__last {
+  color: var(--subtle);
+}
+.intg-card__result:empty {
+  display: none;
+}
+.intg-result {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.intg-result > svg,
+.intg-result > .akit-spinner {
+  flex: none;
+  margin-top: 1px;
+}
+.intg-result--ok {
+  color: var(--ok-text);
+}
+.intg-result--warn {
+  color: var(--warn-text);
+}
+.intg-result--bad {
+  color: var(--p2-text);
+}
+.intg-card__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: auto;
+}
+.intg-btn {
+  padding: 0 12px;
+  font-size: 13px;
+}
+.intg-btn--test {
+  color: var(--link);
+}
+
+/* ---------- Mapping and sync log ---------- */
+
+.intg-row {
+  align-items: stretch;
+}
+.intg-map {
+  min-width: 680px;
+}
+.intg-map-off {
+  margin: 12px 14px 4px;
+}
+.intg-strong {
+  font-weight: 600;
+}
+.intg-nowrap {
+  white-space: nowrap;
+}
+.intg-map td:first-child {
+  white-space: nowrap;
+}
+.intg-dir-in {
+  background: var(--brand-tint);
+  color: var(--navy);
+}
+
+.intg-log {
+  flex: 1 1 340px;
+  display: flex;
+  flex-direction: column;
+}
+.intg-sync {
+  min-height: var(--tap);
+}
+.intg-log__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.intg-log__list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: baseline;
+  gap: 2px 12px;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line-row);
+}
+.intg-log__text {
+  grid-column: 2;
+  font-size: 12px;
+  color: var(--muted);
+}
+.intg-log__more {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: var(--tap);
+  border-top: 1px solid var(--line-soft);
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* ---------- Add dialog ---------- */
+
+.intg-kinds {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+.intg-kinds legend {
+  margin-bottom: 6px;
+  padding: 0;
+}
+.intg-kind {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  min-height: var(--tap);
+  padding: 10px 12px;
+  border: 1px solid var(--line-input);
+  border-radius: var(--radius);
+  cursor: pointer;
+  font-size: 13px;
+}
+.intg-kind.is-on {
+  border-color: var(--brand);
+  background: var(--brand-tint-2);
+}
+.intg-kind input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: var(--brand);
+}
+.intg-kind > svg {
+  flex: none;
+  color: var(--navy);
+}
+.intg-kind__desc {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+}
+.intg-err {
+  color: var(--p2-text);
+}
+
+/* ---------- Live positions, hints, footer ---------- */
+
+.intg-pos {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin: 4px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.intg-pos li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px 6px;
+}
+.intg-pos strong {
+  font-weight: 600;
+  color: var(--ink);
+}
+.intg-card__why {
+  margin-top: -4px;
+  font-size: 12px;
+  color: var(--muted);
+}
+.intg-log__foot {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+}
+.intg-log__foot .intg-log__more {
+  margin-top: 0;
+}
+.intg-linkbtn {
+  min-height: var(--tap);
+  border: 0;
+  border-top: 1px solid var(--line-soft);
+  background: transparent;
+  color: var(--link);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.intg-linkbtn:hover {
+  color: var(--link-hover);
+}
+.intg-remove {
+  color: var(--p2-text);
+}
