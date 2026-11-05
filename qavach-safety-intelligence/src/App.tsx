@@ -9,11 +9,13 @@ import { Rules } from './pages/rules/Rules';
 import { RuleEditor } from './pages/rules/RuleEditor';
 import { Notifications } from './pages/Notifications';
 import { Phone } from './pages/phone/Phone';
+import { useBackendBridge } from './state/bridge';
 import { useEngine } from './state/engine';
 
 // Hash routes so the built prototype also works opened straight from disk.
 function Root() {
   useEngine();
+  useBackendBridge();
   return <Outlet />;
 }
 

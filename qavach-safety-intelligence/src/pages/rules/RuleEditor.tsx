@@ -6,7 +6,9 @@ import { CameraView, CHANNEL, Modal, PRIORITY_NAME, PriorityBadge, QaiLabel, Seg
 import { AREAS } from '../../data/seed';
 import type { Camera, Classification, Condition, Ppe, Priority, QavachRecordType, Rule, Schedule, Subject } from '../../data/types';
 import { CONDITION_LABEL, describeRule, draftRuleFromText, SCHEDULE_LABEL, SUBJECT_LABEL, type RuleDraft } from '../../lib/qai';
+import { apiUrl } from '../../lib/backend';
 import { hm } from '../../lib/time';
+import { useMatches } from '../../state/bridge';
 import { raiseFor } from '../../state/engine';
 import { deleteRule, isAdmin, nextRuleId, roleText, saveRule, toast, useCameras, useMe, usePolicies, useRules } from '../../state/store';
 import './rules.css';
@@ -39,6 +41,10 @@ export function RuleEditor() {
         subject: 'person',
         condition: 'enters',
         durationSec: 3,
+        minFrames: 3,
+        minConfidence: 0.25,
+        repeatSec: 120,
+        minMovePx: 10,
         ppe: [],
         crowdOver: 6,
         schedule: 'always',
@@ -60,6 +66,9 @@ export function RuleEditor() {
   const zoneOptions = useZoneOptions(chosen);
   const selectedZoneNames = zoneOptions.filter((o) => o.ids.some((id) => rule.zoneIds.includes(id))).map((o) => o.name);
   const policy = policies.find((p) => p.priority === rule.priority);
+  const realCams = chosen.filter((c) => c.source);
+  const matches = useMatches().filter((m) => m.ruleId === rule.id);
+  const steady = { frames: rule.minFrames ?? 3, sure: Math.round((rule.minConfidence ?? 0.25) * 100), repeat: rule.repeatSec ?? 120, move: rule.minMovePx ?? 10 };
 
   if (ruleId && !existing) {
     return (
@@ -216,7 +225,7 @@ export function RuleEditor() {
                       </button>
                     );
                   })}
-                  <span className="meta">{rule.zoneIds.length ? '' : 'None picked: the whole view'}</span>
+                  <span className="meta">{rule.zoneIds.length ? '' : realCams.length ? 'None picked: people anywhere in the view count, outside the drawn zones too' : 'None picked: the whole view'}</span>
                 </div>
               )}
             </div>
@@ -285,6 +294,41 @@ export function RuleEditor() {
               </div>
             </div>
 
+            {rule.condition === 'enters' && (
+              <div className="field steady">
+                <span className="field__label">How steady and how sure</span>
+                <div className="grid-3" style={{ gap: 12, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(170px, 1fr))' }}>
+                  <div className="field">
+                    <label htmlFor="r-frames">Frames in a row</label>
+                    <input id="r-frames" className="input" type="number" min={1} max={300} value={steady.frames} onChange={(e) => set({ minFrames: Math.max(1, Math.round(Number(e.target.value)) || 1) })} />
+                    <span className="field__hint">Seen in the zone this many analysed frames in a row. Ignores one-frame blips.</span>
+                  </div>
+                  <div className="field">
+                    <label htmlFor="r-sure">Detector at least (%) sure</label>
+                    <input id="r-sure" className="input" type="number" min={0} max={100} value={steady.sure} onChange={(e) => set({ minConfidence: Math.min(100, Math.max(0, Number(e.target.value) || 0)) / 100 })} />
+                    <span className="field__hint">A person it is less sure of never alerts, however long they stay.</span>
+                  </div>
+                  <div className="field">
+                    <label htmlFor="r-repeat">Don't repeat for (seconds)</label>
+                    <input id="r-repeat" className="input" type="number" min={0} value={steady.repeat} onChange={(e) => set({ repeatSec: Math.max(0, Number(e.target.value) || 0) })} />
+                    <span className="field__hint">After an alert, the same person raises no new one for this long.</span>
+                  </div>
+                  <div className="field">
+                    <label htmlFor="r-move">Must have moved (pixels)</label>
+                    <input id="r-move" className="input" type="number" min={0} value={steady.move} onChange={(e) => set({ minMovePx: Math.max(0, Number(e.target.value) || 0) })} />
+                    <span className="field__hint">Ignores a pole or flag the detector sometimes calls a person: it never moves. Someone who walks in and then stops still counts. 0 turns it off.</span>
+                  </div>
+                </div>
+              </div>
+            )}
+            {realCams.length > 0 && (
+              <span className={`chip ${rule.condition === 'enters' && rule.subject !== 'vehicle' ? 'chip--good' : 'chip--warn'}`}>
+                {rule.condition === 'enters' && rule.subject !== 'vehicle'
+                  ? `Runs for real on ${realCams.length} camera${realCams.length === 1 ? '' : 's'} with a live link or uploaded video`
+                  : 'Only "enters the zone" for people runs on real cameras so far; this rule will not alert on them'}
+              </span>
+            )}
+
             <div className={`field${aiCls('priority')}`}>
               <span className="field__label">Alert level</span>
               <Seg
@@ -348,7 +392,21 @@ export function RuleEditor() {
             </div>
             <div className="card card--pad stack">
               <h3>Check it before it goes live</h3>
-              <button type="button" className="btn btn--secondary" onClick={runBacktest} disabled={!chosen.length}>
+              {realCams.length > 0 && (
+                <div className="stack" style={{ gap: 6 }}>
+                  <strong>
+                    Test matches ({matches.length})
+                  </strong>
+                  {rule.mode !== 'test' && <span className="meta">Set the mode to Test to log matches here without telling anyone.</span>}
+                  {rule.mode === 'test' && matches.length === 0 && <span className="meta">None yet. Matches from the real camera appear here as they happen.</span>}
+                  {matches.slice(0, 6).map((m) => (
+                    <a key={m.id} className="meta" href={apiUrl(m.snapshot)} target="_blank" rel="noreferrer">
+                      {hm(m.at)} · {m.cameraId} · {m.zoneName || 'whole view'} · {Math.round(m.confidence * 100)}% · {m.dwell.toFixed(1)} s
+                    </a>
+                  ))}
+                </div>
+              )}
+              <button type="button" className="btn btn--secondary" onClick={runBacktest} disabled={!chosen.length || (realCams.length > 0 && realCams.length === chosen.length)} title={realCams.length === chosen.length && realCams.length > 0 ? 'Not available for real cameras: use Test mode and watch the matches' : undefined}>
                 <Icon name="clock" size={16} />
                 Try it on the last 24 hours
               </button>
@@ -419,7 +477,10 @@ export function RuleEditor() {
           onClose={() => setPicking(false)}
           onDone={(ids) => {
             const keepZones = rule.zoneIds.filter((z) => ids.some((id) => z.startsWith(`${id}-`)));
-            set({ cameraIds: ids, zoneIds: keepZones }, 'cameras');
+            // On a real camera the zones drawn on it are what the rule is for: start with all of them picked, so a person
+            // outside them does not alert. Un-pick them all to watch the whole view.
+            const drawn = keepZones.length ? [] : cams.filter((c) => ids.includes(c.id) && c.source).flatMap((c) => c.zones.map((z) => z.id));
+            set({ cameraIds: ids, zoneIds: [...keepZones, ...drawn] }, 'cameras');
             setPicking(false);
           }}
         />

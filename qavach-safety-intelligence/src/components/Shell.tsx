@@ -1,4 +1,5 @@
 import { useMemo, useRef, useState, type ReactNode } from 'react';
+import { useService } from '../state/bridge';
 import { Link, NavLink, Outlet, useNavigate } from 'react-router';
 import { SITE, USERS } from '../data/seed';
 import { resetAll, useStore } from '../lib/persist';
@@ -84,6 +85,7 @@ function TopBar({ onBell }: { onBell: () => void }) {
   const me = useMe();
   const alerts = useAlerts();
   const now = useNow(1000);
+  const service = useService();
   const mine = alerts.filter((a) => isOpen(a) && a.deliveries.some((d) => d.to === me.id)).length;
   return (
     <header className="bar">
@@ -101,6 +103,10 @@ function TopBar({ onBell }: { onBell: () => void }) {
       </span>
       <Search />
       <span className="spacer" />
+      <span className={`bar__service${service.online ? ' is-on' : ''}`} title={service.online ? 'Connected to the detection service: real cameras and rules run for real.' : 'The detection service is not running. Sample data only. Start it with backend/run.sh.'}>
+        <span className="bar__live-dot" />
+        {service.online ? 'Detection on' : 'Detection offline'}
+      </span>
       <button
         type="button"
         className={`bar__live${live ? '' : ' is-paused'}`}

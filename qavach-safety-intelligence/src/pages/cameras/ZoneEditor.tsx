@@ -134,7 +134,7 @@ export function ZoneEditor({ cam, zones, onChange, selectedId, onSelect, readOnl
         </div>
       )}
       <div className={`zedit__canvas zedit__canvas--${tool}`}>
-        <CameraView cam={cam} still caption />
+        <CameraView cam={cam} still frozen caption />
         <svg ref={svg} className="zedit__svg" viewBox="0 0 100 100" preserveAspectRatio="none" onPointerDown={down} onPointerMove={move} onPointerUp={up} onPointerLeave={() => setHover(null)} onDoubleClick={() => tool === 'polygon' && draft.length >= 3 && finish(draft, 'polygon')}>
           {zones.map((z) => {
             const c = ZONE_COLORS[z.purpose];

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { draftRecord } from '../lib/qai';
 import { hm } from '../lib/time';
 import type { Alert, Camera, Delivery, Policy, Rule, Zone } from '../data/types';
+import type { BackendEvent } from '../lib/backend';
 import {
   acknowledge,
   activityStore,
@@ -32,7 +33,7 @@ const LEADER_KEY = 'qsi.v1.engine.leader';
 const me = Math.random().toString(36).slice(2);
 
 /** Only one window generates events; the others follow through storage events. */
-function isLeader(now: number) {
+export function isLeader(now: number) {
   try {
     const raw = window.localStorage.getItem(LEADER_KEY);
     const cur = raw ? (JSON.parse(raw) as { id: string; ts: number }) : null;
@@ -139,6 +140,32 @@ export function raiseFor(rule: Rule, cam: Camera, opts: { quiet?: boolean } = {}
   return alert;
 }
 
+/** Raises an alert for something the detection service saw on a real camera. */
+export function raiseFromEvent(ev: BackendEvent, rule: Rule, cam: Camera): Alert {
+  const policy = policyStore.get().find((p) => p.priority === rule.priority)!;
+  const where = ev.zoneName || 'the camera view';
+  const alert: Alert = {
+    id: nextAlertId(),
+    eventId: ev.id,
+    ruleId: rule.id,
+    cameraId: cam.id,
+    zoneId: ev.zoneId ?? undefined,
+    priority: rule.priority,
+    title: rule.name,
+    detail: `Inside ${where} for ${ev.dwell.toFixed(1)} s (rule: ${rule.durationSec} s or more) · moved ${Math.round(ev.moved)} px${ev.reentry ? ' · came back' : ''}`,
+    at: ev.at,
+    state: 'new',
+    box: ev.box,
+    confidence: ev.confidence,
+    snapshot: ev.snapshot,
+    deliveries: deliveriesFor(policy, cam, ev.at),
+    activity: [{ at: ev.at, text: `Detected by the edge model · person #${ev.trackId}`, actor: 'system' }],
+  };
+  addAlert(alert);
+  toast(`${alert.priority} · ${alert.title} · ${cam.id} ${cam.name}`, { tone: alert.priority === 'P1' || alert.priority === 'P2' ? 'alert' : undefined, link: `/alerts/${alert.id}` });
+  return alert;
+}
+
 function generate(now: number) {
   const cams = cameraStore.get();
   const camById = new Map(cams.map((c) => [c.id, c]));
@@ -150,7 +177,8 @@ function generate(now: number) {
   const pool = live.flatMap((r) => Array.from({ length: WEIGHT[r.priority] }, () => r));
   for (let tries = 0; tries < 6 && pool.length; tries++) {
     const rule = pool[Math.floor(Math.random() * pool.length)];
-    const options = rule.cameraIds.map((id) => camById.get(id)).filter((c): c is Camera => !!c && c.status !== 'offline' && !busy.has(c.id));
+    // Real cameras (a link or an uploaded video) get their alerts from the detection service, never from here.
+    const options = rule.cameraIds.map((id) => camById.get(id)).filter((c): c is Camera => !!c && !c.source && c.status !== 'offline' && !busy.has(c.id));
     if (!options.length) continue;
     raiseFor(rule, options[Math.floor(Math.random() * options.length)]);
     return;
@@ -213,6 +241,10 @@ function updateActivity() {
   const prev = activityStore.get();
   const next: Record<string, number> = {};
   for (const c of cameraStore.get()) {
+    if (c.source) {
+      next[c.id] = prev[c.id] ?? 0; // counted by the detection service (state/bridge.ts)
+      continue;
+    }
     if (c.status === 'offline') {
       next[c.id] = 0;
       continue;

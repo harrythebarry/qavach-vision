@@ -1,0 +1,7 @@
+# The tracker worker environment (BoxMOT BoT-SORT with OSNet re-identification). It is a separate environment because
+# BoxMOT and the detector were set up apart in the port-safety project; the service starts it as a child process.
+torch==2.14.1
+torchvision==0.29.1
+boxmot==25.0.0
+numpy==2.5.4
+opencv-python==4.14.0.94

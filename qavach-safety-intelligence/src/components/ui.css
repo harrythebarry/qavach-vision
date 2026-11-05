@@ -1,4 +1,4 @@
-.camview { position: relative; overflow: hidden; background: var(--q-night); border-radius: var(--q-r); aspect-ratio: 16 / 9; container-type: inline-size; }
+.camview { position: relative; overflow: hidden; background: var(--q-night); border-radius: var(--q-r); aspect-ratio: var(--ar, 16 / 9); container-type: inline-size; }
 .camview > svg:first-child { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .camview__zones { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .camview__zone-label { position: absolute; transform: translateX(-50%); font-size: 11px; font-weight: 600; color: #fff; background: rgba(11, 24, 40, .78); border-left: 3px solid; padding: 1px 6px; border-radius: 3px; white-space: nowrap; pointer-events: none; }
@@ -12,3 +12,8 @@
 .camview__rec { width: 7px; height: 7px; border-radius: 50%; background: #FF4D5E; animation: blink 2s steps(1) infinite; flex: 0 0 auto; }
 .camview__time { font-family: var(--q-mono); font-size: 10.5px; color: #C9D3DE; flex: 0 0 auto; }
 .camview__degraded { position: absolute; top: 6px; left: 6px; font-size: 10.5px; font-weight: 600; color: #3A2A00; background: #FFD166; padding: 1px 6px; border-radius: 3px; }
+
+.camview__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; user-select: none; }
+.camview__nopic { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 12px; text-align: center; color: #8FA0B3; font-size: 12.5px; background: var(--q-night); }
+.camview__nopic small { color: #6B7C8F; font-size: 11px; }
+@container (max-width: 260px) { .camview__nopic small, .camview__nopic svg { display: none; } .camview__nopic { font-size: 11px; } }

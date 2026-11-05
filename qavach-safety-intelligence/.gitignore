@@ -1,3 +1,8 @@
 node_modules
 dist
 *.tsbuildinfo
+
+# detection service
+backend/data/
+__pycache__/
+.pytest_cache/

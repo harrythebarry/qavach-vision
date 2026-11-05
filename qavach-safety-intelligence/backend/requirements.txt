@@ -1,0 +1,12 @@
+# The detection service environment (YOLO11s person detector, FastAPI service, YouTube links).
+# CPU-only PyTorch is installed from the PyTorch CPU index by the Dockerfile; on a PC without an NVIDIA GPU that is all
+# Docker can use anyway, and it keeps the image about 2 GB smaller.
+torch==2.14.1
+torchvision==0.29.1
+ultralytics==8.3.221
+opencv-python==4.11.0.86
+numpy==2.5.4
+fastapi==0.118.0
+uvicorn==0.37.0
+# Not pinned on purpose: YouTube changes often and an old yt-dlp stops working. Rebuild the image to update it.
+yt-dlp

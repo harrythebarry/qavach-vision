@@ -65,3 +65,8 @@ button.bar__result:hover { background: var(--q-canvas); }
   .bar { padding: 10px 16px; }
   .bar__site, .bar__module .meta { display: none; }
 }
+
+.bar__service { display: inline-flex; align-items: center; gap: 8px; height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid var(--q-border-strong); background: var(--q-surface-2); color: var(--q-muted); font-weight: 600; font-size: 13px; white-space: nowrap; }
+.bar__service .bar__live-dot { background: var(--q-faint); box-shadow: none; }
+.bar__service.is-on { border-color: var(--q-good-border); background: var(--q-good-bg); color: var(--q-good); }
+.bar__service.is-on .bar__live-dot { background: var(--q-live); box-shadow: 0 0 0 3px rgba(61, 214, 140, .25); }

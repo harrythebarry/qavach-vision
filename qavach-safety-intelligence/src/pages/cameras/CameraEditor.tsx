@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router';
 import { Icon } from '../../components/Icon';
 import { ReadOnlyNote } from '../../components/Shell';
-import { CameraView } from '../../components/ui';
+import { CameraView, Seg } from '../../components/ui';
 import { AREAS, camId } from '../../data/seed';
-import type { Camera, ZonePurpose } from '../../data/types';
+import type { Camera, CameraSource, ZonePurpose } from '../../data/types';
+import { backend, rememberPassword, type ProbeResult } from '../../lib/backend';
 import { PURPOSE_LABEL, ZONE_COLORS } from '../../scenes/zones';
+import { useService } from '../../state/bridge';
 import { isAdmin, removeCamera, saveCamera, saveWall, toast, useCameras, useMe, useRules, useWalls } from '../../state/store';
 import { LAYOUT_SLOTS } from '../wall/WallBody';
 import { ZoneEditor } from './ZoneEditor';
@@ -31,6 +33,11 @@ export function CameraEditor() {
   const [user, setUser] = useState('svc-cctv');
   const [pass, setPass] = useState('');
   const [sel, setSel] = useState<string>();
+  const service = useService();
+  const [kind, setKind] = useState<'link' | 'upload'>(existing?.source?.kind ?? 'link');
+  const [err, setErr] = useState('');
+  const [progress, setProgress] = useState<number | null>(null);
+  const picker = useRef<HTMLInputElement>(null);
   const [wallPlan, setWallPlan] = useState<Record<string, 'off' | 'rolls' | 'pinned'>>({});
 
   useEffect(() => {
@@ -63,18 +70,69 @@ export function CameraEditor() {
     if (isNew) setTest('idle');
   };
 
-  const runTest = () => {
-    if (!/^rtsp:\/\/[\w.-]+(:\d+)?\/\S*/.test(cam.stream)) {
-      setTest('fail');
+  const isRtsp = /^rtsps?:\/\//i.test(cam.stream.trim());
+
+  /** A source answered: keep its first frame for drawing zones, and what it told us about itself. */
+  const applyProbe = (r: ProbeResult, source: CameraSource) => {
+    const title = (r.title || (source.fileName ?? '').replace(/\.[^.]+$/, '')).replace(/\s*\(.*$/, '').slice(0, 60);
+    setCam((c) => ({
+      ...c!,
+      name: c!.name || title,
+      resolution: `${r.width} × ${r.height}`,
+      fps: Math.round(r.fps ?? c!.fps),
+      // A real camera is not an Axis or a Hanwha: say what it is instead of keeping the sample default.
+      make: r.kind === 'upload' ? 'Uploaded video' : r.kind === 'youtube' ? 'YouTube live stream' : 'Live stream',
+      stream: source.kind === 'link' ? (source.url ?? '') : `uploaded: ${source.fileName ?? 'video'}`,
+      source: { ...source, frameUrl: r.frameUrl, width: r.width, height: r.height, live: r.live, title: r.title },
+    }));
+    setErr('');
+    setTest('ok');
+  };
+
+  const runTest = async () => {
+    if (!service.online) {
+      // Without the detection service this is the sample flow: a shape check and a drawn scene.
+      if (!/^rtsp:\/\/[\w.-]+(:\d+)?\/\S*/.test(cam.stream)) {
+        setTest('fail');
+        setErr('Use an RTSP address, for example rtsp://10.40.1.25:554/stream1');
+        return;
+      }
+      setTest('testing');
+      window.setTimeout(() => setTest('ok'), 1200);
       return;
     }
+    const url = cam.stream.trim();
     setTest('testing');
-    window.setTimeout(() => setTest('ok'), 1200);
+    setErr('');
+    try {
+      const r = await backend.probeLink(url, isRtsp ? { user, password: pass } : undefined);
+      applyProbe(r, { kind: 'link', url, user: isRtsp ? user : undefined });
+    } catch (e) {
+      setTest('fail');
+      setErr((e as Error).message);
+    }
+  };
+
+  const sendFile = async (file: File | undefined) => {
+    if (!file) return;
+    setTest('testing');
+    setErr('');
+    setProgress(0);
+    try {
+      const r = await backend.upload(file, setProgress);
+      applyProbe(r, { kind: 'upload', uploadId: r.uploadId, fileName: file.name });
+    } catch (e) {
+      setTest('fail');
+      setErr((e as Error).message);
+    } finally {
+      setProgress(null);
+    }
   };
 
   const usedBy = (zoneId: string) => rules.filter((r) => r.zoneIds.includes(zoneId)).map((r) => r.id);
 
   const save = () => {
+    if (isRtsp) rememberPassword(cam.id, pass);
     saveCamera({ ...cam, addedAt: existing?.addedAt ?? Date.now(), addedBy: existing?.addedBy ?? me.id, status: existing?.status ?? 'online' });
     for (const w of walls) {
       const want = wallPlan[w.id] ?? 'off';
@@ -166,62 +224,107 @@ export function CameraEditor() {
                 <label htmlFor="c-name">Name people will see</label>
                 <input id="c-name" className="input" value={cam.name} onChange={(e) => set({ name: e.target.value })} placeholder="For example: Berth 2 · deck port side" />
               </div>
-              <div className="field">
-                <label htmlFor="c-url">Stream address (RTSP)</label>
-                <input
-                  id="c-url"
-                  className="input mono"
-                  value={cam.stream}
-                  onChange={(e) => {
-                    set({ stream: e.target.value });
-                    if (isNew) setTest('idle');
-                  }}
-                  placeholder="rtsp://10.40.1.25:554/stream1"
-                />
-                <span className="field__hint">The camera's main stream on the terminal network. The edge unit pulls it; nothing is exposed outside.</span>
-              </div>
-              <div className="grid-2" style={{ gap: 12 }}>
+              {service.online ? (
                 <div className="field">
-                  <label htmlFor="c-user">User name</label>
-                  <input id="c-user" className="input" value={user} onChange={(e) => setUser(e.target.value)} autoComplete="off" />
+                  <span className="field__label">Where the picture comes from</span>
+                  <Seg
+                    label="Source"
+                    value={kind}
+                    onChange={(v) => {
+                      setKind(v);
+                      setErr('');
+                      if (isNew) setTest('idle');
+                    }}
+                    options={[
+                      { value: 'link', label: 'Live link or address' },
+                      { value: 'upload', label: 'Upload a video' },
+                    ]}
+                  />
                 </div>
+              ) : (
+                <span className="chip chip--warn">Detection service not running: only the sample flow works. Start it with backend/run.sh to use a real camera.</span>
+              )}
+              {kind === 'link' || !service.online ? (
+                <>
+                  <div className="field">
+                    <label htmlFor="c-url">{service.online ? 'YouTube live link or stream address' : 'Stream address (RTSP)'}</label>
+                    <input
+                      id="c-url"
+                      className="input mono"
+                      value={cam.stream}
+                      onChange={(e) => {
+                        set({ stream: e.target.value });
+                        if (isNew) setTest('idle');
+                      }}
+                      placeholder={service.online ? 'https://www.youtube.com/live/…  or  rtsp://10.40.1.25:554/stream1' : 'rtsp://10.40.1.25:554/stream1'}
+                    />
+                    <span className="field__hint">A YouTube live link, or a camera's stream on the network (RTSP, or an http / HLS stream). The detection service pulls it; nothing is exposed outside.</span>
+                  </div>
+                  {(isRtsp || !service.online) && (
+                    <div className="grid-2" style={{ gap: 12 }}>
+                      <div className="field">
+                        <label htmlFor="c-user">User name</label>
+                        <input id="c-user" className="input" value={user} onChange={(e) => setUser(e.target.value)} autoComplete="off" />
+                      </div>
+                      <div className="field">
+                        <label htmlFor="c-pass">Password</label>
+                        <input id="c-pass" className="input" type="password" value={pass} onChange={(e) => setPass(e.target.value)} autoComplete="new-password" placeholder={isNew ? '' : 'Saved · leave blank to keep'} />
+                      </div>
+                    </div>
+                  )}
+                </>
+              ) : (
                 <div className="field">
-                  <label htmlFor="c-pass">Password</label>
-                  <input id="c-pass" className="input" type="password" value={pass} onChange={(e) => setPass(e.target.value)} autoComplete="new-password" placeholder={isNew ? '' : 'Saved · leave blank to keep'} />
+                  <span className="field__label">Video file</span>
+                  <input ref={picker} type="file" accept="video/*,.mkv" hidden onChange={(e) => { void sendFile(e.target.files?.[0]); e.target.value = ''; }} />
+                  <div className="row">
+                    <button type="button" className="btn btn--secondary" onClick={() => picker.current?.click()} disabled={test === 'testing'}>
+                      <Icon name="camera" size={16} />
+                      {cam.source?.kind === 'upload' ? 'Choose another video' : 'Choose a video'}
+                    </button>
+                    {progress !== null && <span className="meta">Uploading {Math.round(progress * 100)}%</span>}
+                    {progress === null && cam.source?.kind === 'upload' && <span className="meta">{cam.source.fileName}</span>}
+                  </div>
+                  <span className="field__hint">mp4, mov, avi, mkv or webm. It plays in real time and starts over when it ends, like a camera that is always on. Use it when the live feed has nothing happening.</span>
                 </div>
-              </div>
-              <div className="field">
-                <label htmlFor="c-make">Make and model</label>
-                <select id="c-make" className="select" value={cam.make} onChange={(e) => set({ make: e.target.value })}>
-                  {MAKES.map((m) => (
-                    <option key={m}>{m}</option>
-                  ))}
-                </select>
-              </div>
+              )}
+              {!service.online && !cam.source && (
+                <div className="field">
+                  <label htmlFor="c-make">Make and model</label>
+                  <select id="c-make" className="select" value={cam.make} onChange={(e) => set({ make: e.target.value })}>
+                    {MAKES.map((m) => (
+                      <option key={m}>{m}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
               <div className="row">
-                <button type="button" className="btn btn--secondary" onClick={runTest} disabled={test === 'testing' || !cam.stream}>
-                  <Icon name="wifi" size={16} />
-                  {test === 'testing' ? 'Testing…' : 'Test connection'}
-                </button>
+                {(kind === 'link' || !service.online) && (
+                  <button type="button" className="btn btn--secondary" onClick={() => void runTest()} disabled={test === 'testing' || !cam.stream.trim()}>
+                    <Icon name="wifi" size={16} />
+                    {test === 'testing' ? 'Testing…' : 'Test connection'}
+                  </button>
+                )}
+                {test === 'testing' && kind === 'upload' && <span className="meta">Reading the video…</span>}
                 {test === 'ok' && (
                   <span className="chip chip--good">
                     <Icon name="check" size={14} />
-                    Connected · {cam.resolution} · {cam.fps} fps · H.265
+                    Connected · {cam.resolution} · {cam.fps} fps · {cam.source ? (cam.source.live ? 'live' : 'video, plays in a loop') : 'H.265'}
                   </span>
                 )}
-                {test === 'fail' && <span className="chip chip--danger">Use an RTSP address, for example rtsp://10.40.1.25:554/stream1</span>}
+                {test === 'fail' && <span className="chip chip--danger">{err || 'Could not connect'}</span>}
               </div>
             </div>
             <div className="stack">
               {test === 'ok' ? (
-                <CameraView cam={cam} />
+                <CameraView cam={cam} still={!!cam.source} frozen />
               ) : (
                 <div className="camedit__placeholder">
                   <Icon name="camera" size={30} />
                   <span>{test === 'testing' ? 'Connecting to the camera…' : 'Test the connection to see the picture'}</span>
                 </div>
               )}
-              <p className="meta">Next you draw the zones on this picture. Detection only runs inside the zones you draw.</p>
+              <p className="meta">{cam.source ? 'This is a real frame from the source. ' : ''}Next you draw the zones on this picture. Detection only runs inside the zones you draw.</p>
             </div>
           </div>
         )}

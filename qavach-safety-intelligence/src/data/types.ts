@@ -22,6 +22,23 @@ export interface Zone {
 
 export type CameraStatus = 'online' | 'degraded' | 'offline';
 
+/** Where a real camera's pictures come from. Cameras without one show the drawn sample scene. */
+export interface CameraSource {
+  kind: 'link' | 'upload';
+  /** A YouTube live link or a stream address. Never holds a password. */
+  url?: string;
+  /** Stream user name (not secret). The password is typed once, kept by the service in memory, and never stored here. */
+  user?: string;
+  uploadId?: string;
+  fileName?: string;
+  /** The still frame taken when the connection was tested; zones are drawn on it. Relative to the detection service. */
+  frameUrl?: string;
+  width?: number;
+  height?: number;
+  live?: boolean;
+  title?: string;
+}
+
 export interface Camera {
   id: string;
   name: string;
@@ -37,6 +54,7 @@ export interface Camera {
   zones: Zone[];
   addedAt: number;
   addedBy: string;
+  source?: CameraSource;
 }
 
 export type Priority = 'P1' | 'P2' | 'P3' | 'P4';
@@ -71,6 +89,12 @@ export interface Rule {
   subject: Subject;
   condition: Condition;
   durationSec: number;
+  /** Detection steadiness for "enters the zone" on a real camera. Defaults: 3 frames, 25 %, 120 s, 10 px. */
+  minFrames?: number;
+  minConfidence?: number;
+  repeatSec?: number;
+  /** The tracked person's feet must have moved this many pixels (a static pole the detector calls a person never does). 0 turns it off. */
+  minMovePx?: number;
   ppe: Ppe[];
   crowdOver: number;
   schedule: Schedule;
@@ -127,6 +151,10 @@ export interface Alert {
   /** Detection box, % of the camera view. */
   box: [number, number, number, number];
   confidence: number;
+  /** The frame the alert was raised on (real cameras), relative to the detection service. */
+  snapshot?: string;
+  /** The detection service's id for the event, so an alert is never created twice. */
+  eventId?: string;
   ackBy?: string;
   ackAt?: number;
   ackVia?: 'wall' | 'console' | 'mobile';

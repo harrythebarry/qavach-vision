@@ -1,3 +1,6 @@
 .DS_Store
 node_modules/
 .gstack/
+
+# written by start.sh / start.cmd: the port this PC uses
+.env

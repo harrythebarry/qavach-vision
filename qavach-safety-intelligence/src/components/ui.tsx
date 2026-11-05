@@ -1,8 +1,10 @@
-import { useEffect, type ReactNode } from 'react';
+import { useEffect, useState, type CSSProperties, type ReactNode } from 'react';
 import { Scene, SCENE_H, SCENE_W } from '../scenes/Scene';
 import { ZONE_COLORS } from '../scenes/zones';
 import type { Alert, AlertState, Camera, Channel, Priority, Zone } from '../data/types';
+import { apiUrl, streamUrl, stillUrl } from '../lib/backend';
 import { hms } from '../lib/time';
+import { useService } from '../state/bridge';
 import { Icon, type IconName } from './Icon';
 import './ui.css';
 
@@ -114,15 +116,15 @@ export function Drawer({ title, onClose, children, footer, wide, sub }: { title:
   );
 }
 
-// Overlays share the scene's 640 × 360 space and its "slice" crop, so zones
-// and boxes stay on the right spot whatever shape the tile is.
-const W = SCENE_W / 100;
-const H = SCENE_H / 100;
-const pts = (z: Zone) => z.points.map((p) => `${p[0] * W},${p[1] * H}`).join(' ');
+// Overlays share the picture's space and its "slice" crop, so zones and boxes stay on the right spot whatever shape
+// the tile is. The drawn scenes are 640 × 360; a real camera uses its own width to height ratio.
+const sizeFor = (aspect: number) => ({ vw: SCENE_H * aspect, W: (SCENE_H * aspect) / 100, H: SCENE_H / 100 });
 
-export function ZoneOverlay({ zones, highlight, box }: { zones: Zone[]; highlight?: string[]; box?: Alert }) {
+export function ZoneOverlay({ zones, highlight, box, aspect = SCENE_W / SCENE_H }: { zones: Zone[]; highlight?: string[]; box?: Alert; aspect?: number }) {
+  const { vw, W, H } = sizeFor(aspect);
+  const pts = (z: Zone) => z.points.map((p) => `${p[0] * W},${p[1] * H}`).join(' ');
   return (
-    <svg className="camview__zones" viewBox={`0 0 ${SCENE_W} ${SCENE_H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <svg className="camview__zones" viewBox={`0 0 ${vw} ${SCENE_H}`} preserveAspectRatio="xMidYMid slice" aria-hidden="true">
       {zones.map((z) => {
         const c = ZONE_COLORS[z.purpose];
         const on = !highlight || highlight.includes(z.id);
@@ -132,23 +134,40 @@ export function ZoneOverlay({ zones, highlight, box }: { zones: Zone[]; highligh
           <polygon key={z.id} points={pts(z)} fill={c} fillOpacity={on ? 0.22 : 0.08} stroke={c} strokeWidth={on ? 2 : 1} vectorEffect="non-scaling-stroke" opacity={on ? 1 : 0.55} />
         );
       })}
-      {box && <DetectionBox alert={box} />}
+      {box && <DetectionBox alert={box} W={W} H={H} />}
     </svg>
   );
 }
 
 const BOX_COLOR: Record<Priority, [string, string]> = { P1: ['#FF5C7A', '#B42341'], P2: ['#FFB45C', '#B9520C'], P3: ['#FFD166', '#8A6400'], P4: ['#FFD166', '#8A6400'] };
 
-function DetectionBox({ alert }: { alert: Alert }) {
+// A person on a wide camera is often 10 to 20 px tall, so a box drawn exactly on them is smaller than its own
+// outline and reads as a blob. The box is grown around the person to a minimum size (in the overlay's 360-high units,
+// about 4 % of the picture's height for the smallest) so it is always a clear rectangle with the person inside.
+const BOX_PAD = 5;
+const BOX_MIN_W = 20;
+const BOX_MIN_H = 30;
+
+function DetectionBox({ alert, W, H }: { alert: Alert; W: number; H: number }) {
   const [x, y, w, h] = alert.box;
   const [stroke, fill] = BOX_COLOR[alert.priority];
+  const vw = 100 * W;
+  const vh = 100 * H;
+  const bw = Math.max(w * W + 2 * BOX_PAD, BOX_MIN_W);
+  const bh = Math.max(h * H + 2 * BOX_PAD, BOX_MIN_H);
+  const bx = Math.min(vw - bw, Math.max(0, (x + w / 2) * W - bw / 2));
+  const by = Math.min(vh - bh, Math.max(0, (y + h / 2) * H - bh / 2));
   const label = `${Math.round(alert.confidence * 100)}%`;
+  const lw = label.length * 6 + 8;
+  const lh = 13;
+  const ly = by - lh >= 0 ? by - lh : by + bh; // above the box, or below it when the box touches the top edge
+  const lx = Math.min(vw - lw, bx);
   return (
     <g>
-      <rect x={x * W} y={y * H} width={w * W} height={h * H} rx={3} fill="none" stroke="#000" strokeOpacity={0.35} strokeWidth={4} vectorEffect="non-scaling-stroke" />
-      <rect x={x * W} y={y * H} width={w * W} height={h * H} rx={3} fill="none" stroke={stroke} strokeWidth={2.5} vectorEffect="non-scaling-stroke" />
-      <rect x={x * W - 1} y={y * H - 16} width={label.length * 7 + 8} height={14} rx={2} fill={fill} />
-      <text x={x * W + 3} y={y * H - 5} fill="#fff" fontSize={10.5} fontWeight={600} fontFamily="JetBrains Mono, monospace">
+      <rect x={bx} y={by} width={bw} height={bh} fill="none" stroke="#000" strokeOpacity={0.45} strokeWidth={3.5} vectorEffect="non-scaling-stroke" />
+      <rect x={bx} y={by} width={bw} height={bh} fill="none" stroke={stroke} strokeWidth={2} vectorEffect="non-scaling-stroke" />
+      <rect x={lx} y={ly} width={lw} height={lh} fill={fill} />
+      <text x={lx + 4} y={ly + lh - 3.5} fill="#fff" fontSize={9} fontWeight={600} fontFamily="JetBrains Mono, monospace">
         {label}
       </text>
     </g>
@@ -174,10 +193,57 @@ export function ZoneLabels({ zones, highlight }: { zones: Zone[]; highlight?: st
   );
 }
 
+/** How often a still tile of a real camera fetches a fresh frame. */
+const STILL_REFRESH_MS = 4000;
+
+/** The picture of a real camera:
+ *  - live (not `still`): the live preview from the detection service, running like the camera itself;
+ *  - `still`: the latest frame, refreshed every few seconds, so a thumbnail follows the camera;
+ *  - `frozen`: the frame taken when the camera was connected, for drawing zones on;
+ *  - an alert's snapshot, when one is given (the moment it was raised).
+ *  Every one of these is served by the detection service, so when it is not running nothing can load: say so,
+ *  and tell the parent so it does not draw an alert's box over an empty frame. */
+function RealPicture({ cam, still, frozen, snapshot, serviceUp, onMissing }: { cam: Camera; still?: boolean; frozen?: boolean; snapshot?: string; serviceUp: boolean; onMissing: (missing: boolean) => void }) {
+  const [broken, setBroken] = useState(false); // the live preview would not load
+  const [bump, setBump] = useState(0);
+  const [badBump, setBadBump] = useState(-1); // the refresh that found no picture yet
+  const [failed, setFailed] = useState<string | null>(null); // the last address that could not be loaded at all
+  const refreshing = !!still && !frozen && !snapshot && serviceUp;
+  useEffect(() => {
+    setBroken(false);
+    setFailed(null);
+  }, [cam.id, serviceUp]);
+  useEffect(() => {
+    if (!refreshing) return;
+    const t = window.setInterval(() => setBump((n) => n + 1), STILL_REFRESH_MS);
+    return () => window.clearInterval(t);
+  }, [refreshing]);
+  const fallback = stillUrl(cam);
+  const latest = refreshing && badBump !== bump ? `${apiUrl(`/api/cameras/${encodeURIComponent(cam.id)}/frame.jpg`)}?t=${bump}` : undefined;
+  const src = snapshot ? apiUrl(snapshot) : !still && !frozen && serviceUp && !broken ? streamUrl(cam) : (latest ?? fallback);
+  const missing = !src || failed === src;
+  useEffect(() => onMissing(missing), [missing, onMissing]);
+  if (missing)
+    return (
+      <div className="camview__nopic">
+        <Icon name="camera" size={22} />
+        <span>{serviceUp ? 'No picture from this camera' : 'No picture: the detection service is not running'}</span>
+        {!serviceUp && <small>Start it with backend/run.sh</small>}
+      </div>
+    );
+  const onError = () => {
+    if (src === fallback || src === (snapshot ? apiUrl(snapshot) : '')) setFailed(src);
+    else if (src === latest) setBadBump(bump);
+    else setBroken(true);
+  };
+  return <img className="camview__img" src={src} alt="" onError={onError} draggable={false} />;
+}
+
 /** A camera picture with its caption, and optionally zones and an alert's detection box. */
 export function CameraView({
   cam,
   still,
+  frozen,
   alert,
   zones,
   highlightZones,
@@ -189,6 +255,8 @@ export function CameraView({
 }: {
   cam: Camera;
   still?: boolean;
+  /** Real cameras: keep the frame taken at connection (zone drawing) instead of following the camera. */
+  frozen?: boolean;
   alert?: Alert;
   zones?: Zone[];
   highlightZones?: string[];
@@ -198,18 +266,29 @@ export function CameraView({
   className?: string;
   children?: ReactNode;
 }) {
+  const service = useService();
+  const [noPicture, setNoPicture] = useState(false);
+  // An alert's snapshot shows only where the picture is a still (or the service is down). In a live view the
+  // picture is the camera now, and the service draws the people it sees on it, so an old box would be wrong.
+  const liveReal = !!cam.source && !still && !frozen && service.online;
+  const snapshot = cam.source && !liveReal ? alert?.snapshot : undefined;
+  const aspect = cam.source?.width && cam.source?.height ? cam.source.width / cam.source.height : undefined;
   const subjType = alert ? (alert.title.toLowerCase().includes('smoke') ? 'smoke' : alert.title.toLowerCase().includes('truck') || alert.title.toLowerCase().includes('vehicle') ? 'vehicle' : 'person') : undefined;
   return (
-    <div className={`camview${className ? ` ${className}` : ''}`}>
-      <Scene
-        kind={cam.scene}
-        variant={cam.variant}
-        still={still}
-        offline={cam.status === 'offline'}
-        title={`${cam.id} ${cam.name}`}
-        subject={alert && subjType ? { box: alert.box, type: subjType, noPpe: /helmet|vest|life jacket|ppe/i.test(alert.title + alert.detail) } : undefined}
-      />
-      {((zones && zones.length > 0) || alert) && <ZoneOverlay zones={zones ?? []} highlight={highlightZones} box={alert} />}
+    <div className={`camview${className ? ` ${className}` : ''}`} style={aspect ? ({ '--ar': aspect } as CSSProperties) : undefined}>
+      {cam.source ? (
+        <RealPicture cam={cam} still={still} frozen={frozen} snapshot={snapshot} serviceUp={service.online} onMissing={setNoPicture} />
+      ) : (
+        <Scene
+          kind={cam.scene}
+          variant={cam.variant}
+          still={still}
+          offline={cam.status === 'offline'}
+          title={`${cam.id} ${cam.name}`}
+          subject={alert && subjType ? { box: alert.box, type: subjType, noPpe: /helmet|vest|life jacket|ppe/i.test(alert.title + alert.detail) } : undefined}
+        />
+      )}
+      {((zones && zones.length > 0) || alert) && <ZoneOverlay zones={zones ?? []} highlight={highlightZones} box={liveReal || (cam.source && noPicture) ? undefined : alert} aspect={aspect} />}
       {zones && showZoneLabels && <ZoneLabels zones={zones} highlight={highlightZones} />}
       {caption && (
         <div className="camview__caption">

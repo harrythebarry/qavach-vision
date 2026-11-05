@@ -1,3 +1,4 @@
+import { backend, isOnline } from '../lib/backend';
 import { createStore, uid, useStore } from '../lib/persist';
 import { POLICIES, TEAMS, USERS, seedAlerts, seedCameras, seedRules, seedWalls, AREAS } from '../data/seed';
 import type { ActivityEntry, Alert, Camera, Policy, QavachRecord, QavachRecordType, Rule, User, Wall } from '../data/types';
@@ -155,19 +156,42 @@ export function addDeliveries(id: string, d: Alert['deliveries'], entry?: Activi
 export const isOpen = (a: Alert) => a.state === 'new' || a.state === 'escalated';
 
 // ── Cameras, rules, walls, policies ───────────────────────────────
+/** Cameras and rules removed while the detection service was not running; it is told as soon as it is back. */
+export const removalStore = createStore<{ cameras: string[]; rules: string[] }>('pendingRemovals', { cameras: [], rules: [] });
+
+function removeFromService(kind: 'cameras' | 'rules', id: string) {
+  const call = kind === 'cameras' ? () => backend.deleteCamera(id) : () => backend.deleteRule(id);
+  if (isOnline()) call().catch(() => removalStore.set((r) => ({ ...r, [kind]: [...r[kind], id] })));
+  else removalStore.set((r) => ({ ...r, [kind]: [...new Set([...r[kind], id])] }));
+}
+
+/** Tell the detection service about a change, when it is running. When it is not, it gets everything on reconnect. */
+function pushToService(what: string, call: () => Promise<unknown>) {
+  if (!isOnline()) return;
+  call().catch((e: Error) => toast(`Detection service did not accept ${what}: ${e.message}`, { tone: 'alert' }));
+}
+
 export function saveCamera(cam: Camera) {
   cameraStore.set((list) => (list.some((c) => c.id === cam.id) ? list.map((c) => (c.id === cam.id ? cam : c)) : [...list, cam]));
+  if (cam.source) pushToService(`camera ${cam.id}`, () => backend.putCamera(cam));
 }
 export function removeCamera(id: string) {
+  const real = cameraStore.get().find((c) => c.id === id)?.source;
   cameraStore.set((list) => list.filter((c) => c.id !== id));
   ruleStore.set((list) => list.map((r) => ({ ...r, cameraIds: r.cameraIds.filter((c) => c !== id), zoneIds: r.zoneIds.filter((z) => !z.startsWith(`${id}-`)) })));
   wallStore.set((list) => list.map((w) => ({ ...w, pinned: w.pinned.map((p) => (p === id ? null : p)), rotation: w.rotation.filter((c) => c !== id) })));
+  if (real) {
+    removeFromService('cameras', id);
+    for (const r of ruleStore.get()) pushToService(`rule ${r.id}`, () => backend.putRule(r));
+  }
 }
 export function saveRule(rule: Rule) {
   ruleStore.set((list) => (list.some((r) => r.id === rule.id) ? list.map((r) => (r.id === rule.id ? rule : r)) : [...list, rule]));
+  pushToService(`rule ${rule.id}`, () => backend.putRule(rule));
 }
 export function deleteRule(id: string) {
   ruleStore.set((list) => list.filter((r) => r.id !== id));
+  removeFromService('rules', id);
 }
 export function saveWall(wall: Wall) {
   wallStore.set((list) => (list.some((w) => w.id === wall.id) ? list.map((w) => (w.id === wall.id ? wall : w)) : [...list, wall]));
